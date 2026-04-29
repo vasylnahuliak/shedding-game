@@ -1,0 +1,1 @@
+export { RoundMultiplierBadge } from './RoundMultiplierBadge';

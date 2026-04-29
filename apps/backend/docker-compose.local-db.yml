@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shedding-game-postgres-local
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: shedding_game
+      POSTGRES_USER: shedding
+      POSTGRES_PASSWORD: shedding
+    ports:
+      - '5432:5432'
+    volumes:
+      - shedding_game_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U shedding -d shedding_game']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    container_name: shedding-game-redis-local
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  shedding_game_postgres_data:

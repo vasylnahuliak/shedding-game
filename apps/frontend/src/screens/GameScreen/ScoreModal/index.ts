@@ -1,0 +1,1 @@
+export { ScoreModal } from './ScoreModal';

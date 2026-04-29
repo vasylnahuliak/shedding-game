@@ -1,0 +1,1 @@
+export { GameFiltersButton } from './GameFiltersButton';

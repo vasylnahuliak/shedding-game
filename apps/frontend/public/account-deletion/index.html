@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shedding Game Account Deletion</title>
+    <meta
+      name="description"
+      content="Submit an account deletion request for the Shedding Game mobile app."
+    />
+    <link rel="icon" href="/icon.png" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #123c24;
+        --bg-accent: #184b2c;
+        --card: rgba(24, 75, 44, 0.92);
+        --card-border: rgba(247, 242, 231, 0.14);
+        --text: #f7f4ed;
+        --text-muted: #d7ddd5;
+        --text-soft: #9fb0a3;
+        --accent: #e1bc47;
+        --accent-strong: #f0cc62;
+        --danger: #ff8c78;
+        --halo: rgba(103, 201, 143, 0.14);
+        --overlay-soft: rgba(247, 242, 231, 0.05);
+        --overlay-strong: rgba(247, 242, 231, 0.1);
+        --shadow: rgba(3, 12, 7, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background:
+          radial-gradient(circle at top, var(--halo), transparent 32%),
+          linear-gradient(180deg, var(--bg-accent), var(--bg));
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font:
+          16px/1.7 'Avenir Next',
+          'Segoe UI',
+          'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+
+      .shell {
+        width: min(880px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 80px;
+      }
+
+      .hero,
+      .section {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 28px;
+        box-shadow: 0 24px 60px var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .hero {
+        padding: 32px;
+        margin-bottom: 20px;
+      }
+
+      .section {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(225, 188, 71, 0.14);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 12px;
+        line-height: 1.1;
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+      }
+
+      h2 {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+      }
+
+      p,
+      li,
+      label {
+        color: var(--text-muted);
+      }
+
+      .lead {
+        max-width: 66ch;
+        font-size: 1.05rem;
+      }
+
+      .summary {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .summary-item {
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: var(--overlay-soft);
+        border: 1px solid var(--overlay-strong);
+      }
+
+      .summary-item strong,
+      strong {
+        color: var(--text);
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field-label {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--card-border);
+        border-radius: 18px;
+        background: rgba(7, 24, 13, 0.28);
+        color: var(--text);
+        padding: 14px 16px;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 132px;
+        resize: vertical;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: var(--text-soft);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .button,
+      .link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .button {
+        border: 0;
+        background: var(--accent);
+        color: #18220f;
+        cursor: pointer;
+      }
+
+      .button[disabled] {
+        cursor: wait;
+        opacity: 0.72;
+      }
+
+      .link {
+        border: 1px solid var(--card-border);
+        color: var(--text);
+      }
+
+      .status {
+        min-height: 24px;
+        font-size: 0.95rem;
+      }
+
+      .status[data-tone='success'] {
+        color: #b7f2c7;
+      }
+
+      .status[data-tone='error'] {
+        color: var(--danger);
+      }
+
+      .fine-print {
+        margin-top: 6px;
+        color: var(--text-soft);
+        font-size: 0.95rem;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li + li {
+        margin-top: 10px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(100%, calc(100% - 20px));
+          padding: 20px 0 40px;
+        }
+
+        .hero,
+        .section {
+          border-radius: 24px;
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <span class="eyebrow">Account Deletion</span>
+        <h1>Request account deletion for Shedding Game</h1>
+        <p class="lead">
+          Use this form if you want us to delete your Shedding Game account and associated app data
+          but you cannot access the mobile app right now.
+        </p>
+
+        <div class="summary">
+          <div class="summary-item">
+            <strong>What this page does</strong>
+            It records your request so the account can be reviewed and deleted by the app operator.
+          </div>
+          <div class="summary-item">
+            <strong>Fastest option if you still have app access</strong>
+            Open the app, go to Profile, then Settings, then Delete account. That in-app flow is
+            immediate.
+          </div>
+          <div class="summary-item">
+            <strong>What may remain</strong>
+            Some historical gameplay records may remain in anonymized form so old matches and stats
+            stay internally consistent.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Submit deletion request</h2>
+        <form id="account-deletion-form" novalidate>
+          <div class="field">
+            <label class="field-label" for="email">Account email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="displayName">Display name in the app</label>
+            <input
+              id="displayName"
+              name="displayName"
+              type="text"
+              autocomplete="nickname"
+              placeholder="Optional"
+            />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="userId">User ID</label>
+            <input id="userId" name="userId" type="text" placeholder="Optional, if you know it" />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="notes">Extra details</label>
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Optional. Add anything that helps us find the correct account."
+            ></textarea>
+          </div>
+
+          <div class="actions">
+            <button id="submit-button" class="button" type="submit">Submit request</button>
+            <a class="link" href="/privacy-policy/">Privacy Policy</a>
+            <a class="link" href="/">Back to site</a>
+          </div>
+
+          <p id="form-status" class="status" aria-live="polite"></p>
+        </form>
+
+        <p class="fine-print">
+          By submitting this form, you are asking the operator of Shedding Game to review and
+          process an account deletion request for the information you provide.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>What happens next</h2>
+        <ul>
+          <li>We record the request details you submit on this page.</li>
+          <li>We use those details to identify the matching Shedding Game account.</li>
+          <li>
+            When deletion is completed, account data is removed and any retained game history is
+            anonymized where needed.
+          </li>
+        </ul>
+      </section>
+    </main>
+    <script src="/account-deletion/account-deletion.js" defer></script>
+  </body>
+</html>

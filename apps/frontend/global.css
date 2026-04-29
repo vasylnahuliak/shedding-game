@@ -1,0 +1,360 @@
+@import 'tailwindcss';
+@import 'uniwind';
+
+@layer theme {
+  /* Dark-only theme — all tokens from Unistyles darkTheme */
+  :where(.dark, .dark *) {
+    /* ── Palette ── */
+    --palette-white: 255 249 240;
+    --palette-paper: 255 244 223;
+    --palette-gold: 242 193 78;
+    --palette-teal: 47 158 92;
+    --palette-blue: 119 168 255;
+    --palette-green: 110 215 163;
+    --palette-orange: 240 183 99;
+    --palette-red: 243 123 107;
+    --palette-slate950: 12 47 33;
+    --palette-slate900: 18 59 42;
+    --palette-slate800: 27 82 59;
+    --palette-slate700: 94 138 114;
+    --palette-ink: 18 32 24;
+
+    /* ── Overlay ── */
+    --overlay-scrim: rgba(2, 13, 8, 0.3);
+    --overlay-scrim-strong: rgba(2, 13, 8, 0.44);
+    --overlay-scrim-hero: rgba(3, 11, 8, 0.7);
+    --overlay-line-soft: rgba(255, 249, 240, 0.08);
+    --overlay-line: rgba(255, 244, 223, 0.16);
+    --overlay-line-strong: rgba(255, 244, 223, 0.28);
+    --overlay-text-muted: rgba(255, 244, 223, 0.54);
+    --overlay-text-soft: rgba(255, 244, 223, 0.74);
+    --overlay-text-strong: rgba(255, 249, 240, 0.92);
+    --overlay-accent-soft: rgba(242, 193, 78, 0.16);
+    --overlay-accent: rgba(242, 193, 78, 0.24);
+    --overlay-accent-strong: rgba(242, 193, 78, 0.4);
+    --overlay-action-soft: rgba(47, 158, 92, 0.16);
+    --overlay-action: rgba(47, 158, 92, 0.26);
+    --overlay-info-soft: rgba(119, 168, 255, 0.18);
+    --overlay-success-soft: rgba(110, 215, 163, 0.16);
+    --overlay-danger-soft: rgba(243, 123, 107, 0.18);
+    --overlay-danger: rgba(243, 123, 107, 0.34);
+
+    /* ── Surfaces ── */
+    --surface-screen: 12 47 33;
+    --surface-screen-raised: 18 59 42;
+    --surface-card: rgba(18, 59, 42, 0.9);
+    --surface-card-strong: 27 82 59;
+    --surface-card-muted: rgba(5, 20, 12, 0.42);
+    --surface-modal: rgba(14, 49, 35, 0.98);
+    --surface-input: #174432;
+    --surface-input-focused: #1f513b;
+    --surface-badge: rgba(255, 249, 240, 0.08);
+    --surface-badge-accent: rgba(242, 193, 78, 0.16);
+    --surface-icon-button: rgba(255, 249, 240, 0.07);
+    --surface-icon-button-danger: rgba(243, 123, 107, 0.18);
+    --surface-button-disabled: #496756;
+    --surface-card-closed: #314636;
+    --surface-card-face: 255 244 223;
+    --surface-action: 47 158 92;
+
+    /* ── Text ── */
+    --text-primary: 255 249 240;
+    --text-secondary: rgba(255, 249, 240, 0.9);
+    --text-tertiary: rgba(255, 244, 223, 0.74);
+    --text-muted: rgba(255, 244, 223, 0.54);
+    --text-accent: 242 193 78;
+    --text-action: 47 158 92;
+    --text-on-accent: 18 32 24;
+    --text-on-action: 255 249 240;
+    --text-on-card-face: 18 32 24;
+    --text-success: 110 215 163;
+    --text-danger: 243 123 107;
+    --text-info: 119 168 255;
+    --text-placeholder: 94 138 114;
+
+    /* ── Border ── */
+    --border-default: rgba(255, 244, 223, 0.16);
+    --border-subtle: rgba(255, 249, 240, 0.08);
+    --border-strong: rgba(255, 244, 223, 0.28);
+    --border-accent: 242 193 78;
+    --border-accent-subtle: rgba(242, 193, 78, 0.24);
+    --border-action: 47 158 92;
+    --border-action-subtle: rgba(47, 158, 92, 0.26);
+    --border-focus: 242 193 78;
+    --border-danger: 243 123 107;
+    --border-input: rgba(255, 244, 223, 0.28);
+    --border-card-face: rgba(23, 27, 32, 0.12);
+
+    /* ── Feedback ── */
+    --feedback-success: 110 215 163;
+    --feedback-danger: 243 123 107;
+    --feedback-warning: 240 183 99;
+    --feedback-info: 119 168 255;
+
+    /* ── Shadow ── */
+    --shadow-hero: rgba(0, 0, 0, 0.44);
+    --shadow-strong: rgba(0, 0, 0, 0.34);
+    --shadow-medium: rgba(0, 0, 0, 0.28);
+    --shadow-soft: rgba(0, 0, 0, 0.22);
+    --shadow-accent: rgba(242, 193, 78, 0.26);
+    --shadow-action: rgba(47, 158, 92, 0.28);
+  }
+
+  /* System prefers dark — apply to unclassed root */
+  @media (prefers-color-scheme: dark) {
+    :root:not(:where(.light, .light *, .dark, .dark *)) {
+      --palette-white: 255 249 240;
+      --palette-paper: 255 244 223;
+      --palette-gold: 242 193 78;
+      --palette-teal: 47 158 92;
+      --palette-blue: 119 168 255;
+      --palette-green: 110 215 163;
+      --palette-orange: 240 183 99;
+      --palette-red: 243 123 107;
+      --palette-slate950: 12 47 33;
+      --palette-slate900: 18 59 42;
+      --palette-slate800: 27 82 59;
+      --palette-slate700: 94 138 114;
+      --palette-ink: 18 32 24;
+
+      --overlay-scrim: rgba(2, 13, 8, 0.3);
+      --overlay-scrim-strong: rgba(2, 13, 8, 0.44);
+      --overlay-scrim-hero: rgba(3, 11, 8, 0.7);
+      --overlay-line-soft: rgba(255, 249, 240, 0.08);
+      --overlay-line: rgba(255, 244, 223, 0.16);
+      --overlay-line-strong: rgba(255, 244, 223, 0.28);
+      --overlay-text-muted: rgba(255, 244, 223, 0.54);
+      --overlay-text-soft: rgba(255, 244, 223, 0.74);
+      --overlay-text-strong: rgba(255, 249, 240, 0.92);
+      --overlay-accent-soft: rgba(242, 193, 78, 0.16);
+      --overlay-accent: rgba(242, 193, 78, 0.24);
+      --overlay-accent-strong: rgba(242, 193, 78, 0.4);
+      --overlay-action-soft: rgba(47, 158, 92, 0.16);
+      --overlay-action: rgba(47, 158, 92, 0.26);
+      --overlay-info-soft: rgba(119, 168, 255, 0.18);
+      --overlay-success-soft: rgba(110, 215, 163, 0.16);
+      --overlay-danger-soft: rgba(243, 123, 107, 0.18);
+      --overlay-danger: rgba(243, 123, 107, 0.34);
+
+      --surface-screen: 12 47 33;
+      --surface-screen-raised: 18 59 42;
+      --surface-card: rgba(18, 59, 42, 0.9);
+      --surface-card-strong: 27 82 59;
+      --surface-card-muted: rgba(5, 20, 12, 0.42);
+      --surface-modal: rgba(14, 49, 35, 0.98);
+      --surface-input: #174432;
+      --surface-input-focused: #1f513b;
+      --surface-badge: rgba(255, 249, 240, 0.08);
+      --surface-badge-accent: rgba(242, 193, 78, 0.16);
+      --surface-icon-button: rgba(255, 249, 240, 0.07);
+      --surface-icon-button-danger: rgba(243, 123, 107, 0.18);
+      --surface-button-disabled: #496756;
+      --surface-card-closed: #314636;
+      --surface-card-face: 255 244 223;
+      --surface-action: 47 158 92;
+
+      --text-primary: 255 249 240;
+      --text-secondary: rgba(255, 249, 240, 0.9);
+      --text-tertiary: rgba(255, 244, 223, 0.74);
+      --text-muted: rgba(255, 244, 223, 0.54);
+      --text-accent: 242 193 78;
+      --text-action: 47 158 92;
+      --text-on-accent: 18 32 24;
+      --text-on-action: 255 249 240;
+      --text-on-card-face: 18 32 24;
+      --text-success: 110 215 163;
+      --text-danger: 243 123 107;
+      --text-info: 119 168 255;
+      --text-placeholder: 94 138 114;
+
+      --border-default: rgba(255, 244, 223, 0.16);
+      --border-subtle: rgba(255, 249, 240, 0.08);
+      --border-strong: rgba(255, 244, 223, 0.28);
+      --border-accent: 242 193 78;
+      --border-accent-subtle: rgba(242, 193, 78, 0.24);
+      --border-action: 47 158 92;
+      --border-action-subtle: rgba(47, 158, 92, 0.26);
+      --border-focus: 242 193 78;
+      --border-danger: 243 123 107;
+      --border-input: rgba(255, 244, 223, 0.28);
+      --border-card-face: rgba(23, 27, 32, 0.12);
+
+      --feedback-success: 110 215 163;
+      --feedback-danger: 243 123 107;
+      --feedback-warning: 240 183 99;
+      --feedback-info: 119 168 255;
+
+      --shadow-hero: rgba(0, 0, 0, 0.44);
+      --shadow-strong: rgba(0, 0, 0, 0.34);
+      --shadow-medium: rgba(0, 0, 0, 0.28);
+      --shadow-soft: rgba(0, 0, 0, 0.22);
+      --shadow-accent: rgba(242, 193, 78, 0.26);
+      --shadow-action: rgba(47, 158, 92, 0.28);
+    }
+  }
+}
+
+@theme inline {
+  /* ── Palette colors (rgb triplets) ── */
+  --color-palette-white: rgb(var(--palette-white));
+  --color-palette-paper: rgb(var(--palette-paper));
+  --color-palette-gold: rgb(var(--palette-gold));
+  --color-palette-teal: rgb(var(--palette-teal));
+  --color-palette-blue: rgb(var(--palette-blue));
+  --color-palette-green: rgb(var(--palette-green));
+  --color-palette-orange: rgb(var(--palette-orange));
+  --color-palette-red: rgb(var(--palette-red));
+  --color-palette-slate950: rgb(var(--palette-slate950));
+  --color-palette-slate900: rgb(var(--palette-slate900));
+  --color-palette-slate800: rgb(var(--palette-slate800));
+  --color-palette-slate700: rgb(var(--palette-slate700));
+  --color-palette-ink: rgb(var(--palette-ink));
+
+  /* ── Surface colors ── */
+  --color-surface-screen: rgb(var(--surface-screen));
+  --color-surface-screen-raised: rgb(var(--surface-screen-raised));
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-strong: rgb(var(--surface-card-strong));
+  --color-surface-card-muted: var(--surface-card-muted);
+  --color-surface-modal: var(--surface-modal);
+  --color-surface-input: var(--surface-input);
+  --color-surface-input-focused: var(--surface-input-focused);
+  --color-surface-badge: var(--surface-badge);
+  --color-surface-badge-accent: var(--surface-badge-accent);
+  --color-surface-icon-button: var(--surface-icon-button);
+  --color-surface-icon-button-danger: var(--surface-icon-button-danger);
+  --color-surface-button-disabled: var(--surface-button-disabled);
+  --color-surface-card-closed: var(--surface-card-closed);
+  --color-surface-card-face: rgb(var(--surface-card-face));
+  --color-surface-action: rgb(var(--surface-action));
+
+  /* ── Text colors ── */
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-muted: var(--text-muted);
+  --color-text-accent: rgb(var(--text-accent));
+  --color-text-action: rgb(var(--text-action));
+  --color-text-on-accent: rgb(var(--text-on-accent));
+  --color-text-on-action: rgb(var(--text-on-action));
+  --color-text-on-card-face: rgb(var(--text-on-card-face));
+  --color-text-success: rgb(var(--text-success));
+  --color-text-danger: rgb(var(--text-danger));
+  --color-text-info: rgb(var(--text-info));
+  --color-text-placeholder: rgb(var(--text-placeholder));
+
+  /* ── Border colors ── */
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-border-accent: rgb(var(--border-accent));
+  --color-border-accent-subtle: var(--border-accent-subtle);
+  --color-border-action: rgb(var(--border-action));
+  --color-border-action-subtle: var(--border-action-subtle);
+  --color-border-focus: rgb(var(--border-focus));
+  --color-border-danger: rgb(var(--border-danger));
+  --color-border-input: var(--border-input);
+  --color-border-card-face: var(--border-card-face);
+
+  /* ── Feedback colors ── */
+  --color-feedback-success: rgb(var(--feedback-success));
+  --color-feedback-danger: rgb(var(--feedback-danger));
+  --color-feedback-warning: rgb(var(--feedback-warning));
+  --color-feedback-info: rgb(var(--feedback-info));
+
+  /* ── Overlay colors ── */
+  --color-overlay-scrim: var(--overlay-scrim);
+  --color-overlay-scrim-strong: var(--overlay-scrim-strong);
+  --color-overlay-scrim-hero: var(--overlay-scrim-hero);
+  --color-overlay-line-soft: var(--overlay-line-soft);
+  --color-overlay-line: var(--overlay-line);
+  --color-overlay-line-strong: var(--overlay-line-strong);
+  --color-overlay-text-muted: var(--overlay-text-muted);
+  --color-overlay-text-soft: var(--overlay-text-soft);
+  --color-overlay-text-strong: var(--overlay-text-strong);
+  --color-overlay-accent-soft: var(--overlay-accent-soft);
+  --color-overlay-accent: var(--overlay-accent);
+  --color-overlay-accent-strong: var(--overlay-accent-strong);
+  --color-overlay-action-soft: var(--overlay-action-soft);
+  --color-overlay-action: var(--overlay-action);
+  --color-overlay-info-soft: var(--overlay-info-soft);
+  --color-overlay-success-soft: var(--overlay-success-soft);
+  --color-overlay-danger-soft: var(--overlay-danger-soft);
+  --color-overlay-danger: var(--overlay-danger);
+
+  /* ── Shadow colors ── */
+  --color-shadow-hero: var(--shadow-hero);
+  --color-shadow-strong: var(--shadow-strong);
+  --color-shadow-medium: var(--shadow-medium);
+  --color-shadow-soft: var(--shadow-soft);
+  --color-shadow-accent: var(--shadow-accent);
+  --color-shadow-action: var(--shadow-action);
+
+  /* ── Spacing (custom scale) ── */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-xxl: 28px;
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-xxl: 24px;
+  --radius-round: 999px;
+  --radius-circle-sm: 88px;
+  --radius-circle-lg: 132px;
+}
+
+@utility text-shadow-subtle {
+  text-shadow: 0px 2px 4px var(--shadow-medium);
+}
+
+@utility text-shadow-emphasis {
+  text-shadow: 0px 6px 14px var(--shadow-medium);
+}
+
+@utility box-shadow-subtle {
+  box-shadow: 0px 2px 4px var(--shadow-medium);
+}
+
+@utility box-shadow-card {
+  box-shadow: 0px 8px 16px var(--shadow-soft);
+}
+
+@utility box-shadow-raised {
+  box-shadow: 0px 12px 24px var(--shadow-soft);
+}
+
+@utility box-shadow-prominent {
+  box-shadow: 0px 18px 34px var(--shadow-soft);
+}
+
+@utility box-shadow-accent {
+  box-shadow: 0px 12px 28px var(--shadow-accent);
+}
+
+@utility box-shadow-action {
+  box-shadow: 0px 12px 28px var(--shadow-action);
+}
+
+@utility box-shadow-strong {
+  box-shadow: 0px 14px 26px var(--shadow-strong);
+}
+
+@utility box-shadow-modal {
+  box-shadow: 0px 24px 48px var(--shadow-strong);
+}
+
+@utility box-shadow-glow {
+  box-shadow:
+    0px 16px 32px var(--shadow-soft),
+    0px 0px 40px var(--shadow-accent);
+}
+
+@utility box-shadow-hero {
+  box-shadow: 0px 0px 40px var(--shadow-hero);
+}

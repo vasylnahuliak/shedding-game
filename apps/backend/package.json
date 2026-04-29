@@ -1,0 +1,58 @@
+{
+  "name": "shedding-game-backend",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "prisma migrate deploy && node --watch --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-dev.mjs src/index.ts",
+    "build": "tsc && tsc-alias -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "roles:grant": "node scripts/grant-role.mjs",
+    "db:ensure": "node scripts/ensure-local-services.mjs",
+    "db:up": "docker compose -f docker-compose.local-db.yml up -d",
+    "db:down": "docker compose -f docker-compose.local-db.yml down",
+    "db:logs": "docker compose -f docker-compose.local-db.yml logs -f postgres redis",
+    "db:logs:postgres": "docker compose -f docker-compose.local-db.yml logs -f postgres",
+    "db:logs:redis": "docker compose -f docker-compose.local-db.yml logs -f redis",
+    "start": "prisma migrate deploy && node dist/index.js",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "22.22.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^7.4.2",
+    "@sentry/node": "^10.45.0",
+    "@shedding-game/shared": "*",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "@supabase/supabase-js": "^2.98.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.1",
+    "jose": "^6.1.3",
+    "pg": "^8.19.0",
+    "prisma": "^7.4.2",
+    "rate-limiter-flexible": "^10.0.1",
+    "redis": "^5.11.0",
+    "socket.io": "^4.8.3",
+    "valibot": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.1.0",
+    "@types/ws": "^8.18.1",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.3"
+  }
+}

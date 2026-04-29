@@ -1,0 +1,10 @@
+node_modules
+dist
+build
+.expo
+*.lock
+uniwind-types.d.ts
+reports/
+.agents/
+.turbo/
+.vscode/

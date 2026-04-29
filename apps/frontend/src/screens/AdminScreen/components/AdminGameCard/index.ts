@@ -1,0 +1,1 @@
+export { AdminGameCard } from './AdminGameCard';

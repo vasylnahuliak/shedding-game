@@ -1,0 +1,16 @@
+# 1) Обовʼязково:
+# - tenancy_ocid: root tenancy OCID (Identity -> Tenancy details)
+# - compartment_ocid: compartment OCID, де створюємо ресурси
+# - ssh_public_key_path: шлях до *.pub ключа, який буде додано в authorized_keys
+
+region            = "eu-frankfurt-1"
+tenancy_ocid      = "ocid1.tenancy.oc1..REPLACE_ME"
+compartment_ocid  = "ocid1.compartment.oc1..REPLACE_ME"
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# 2) Опційно:
+# name_prefix = "shedding-game"
+# ocpus = 4
+# memory_in_gbs = 24
+# boot_volume_size_in_gbs = 60
+

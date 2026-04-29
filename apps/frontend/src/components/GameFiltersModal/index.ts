@@ -1,0 +1,1 @@
+export { GameFiltersModal } from './GameFiltersModal';

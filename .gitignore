@@ -1,0 +1,32 @@
+node_modules/
+apps/*/package-lock.json
+.vscode/
+
+# Build output
+packages/*/dist/
+apps/*/dist/
+
+# Reports
+reports/
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+
+# Secret files
+**/.secrets
+
+# Deployment env files (usually contain secrets)
+deploy/**/env/*.env
+
+# Turbo
+.turbo/
+*.tsbuildinfo
+
+# AI
+.agents/
+
+# macOS
+.DS_Store

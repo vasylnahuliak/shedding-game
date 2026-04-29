@@ -1,0 +1,239 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserType {
+  human
+  bot
+}
+
+enum AppRole {
+  player
+  admin
+  super_admin
+}
+
+enum GameStatus {
+  waiting
+  playing
+  round_over
+  finished
+}
+
+enum Suit {
+  hearts
+  diamonds
+  clubs
+  spades
+}
+
+enum RoomCardLocation {
+  deck
+  discard
+  hand
+  bridge_last
+}
+
+enum RoundScoreEventType {
+  reset_115
+  eliminated
+  jack_bonus
+  bridge
+}
+
+model User {
+  id               String   @id @db.Uuid
+  name             String   @unique
+  email            String   @unique
+  locale           String   @default("uk") @map("locale")
+  userType         UserType @map("user_type")
+  emojiPreferences Json?    @map("emoji_preferences")
+  hapticsEnabled   Boolean  @default(true) @map("haptics_enabled")
+  discardPileExpandedByDefault Boolean @default(false) @map("discard_pile_expanded_by_default")
+  createdAtMs      BigInt   @map("created_at_ms")
+  updatedAtMs      BigInt   @map("updated_at_ms")
+  hostedRooms      Room[]   @relation("RoomHost")
+  roles            UserRole[]
+
+  @@map("users")
+}
+
+model Role {
+  id        Int       @id @default(autoincrement())
+  name      AppRole   @unique
+  users     UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  userId    String  @map("user_id") @db.Uuid
+  roleId    Int     @map("role_id")
+  assignedAtMs BigInt @map("assigned_at_ms")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@index([roleId], map: "user_roles_role_id_idx")
+  @@map("user_roles")
+}
+
+model Room {
+  id                 String    @id @db.Uuid
+  name               String
+  hostId             String    @map("host_id") @db.Uuid
+  createdAtMs        BigInt    @map("created_at_ms")
+  lastActivityAtMs   BigInt    @map("last_activity_at_ms")
+  turnStartedAtMs    BigInt?   @map("turn_started_at_ms")
+  gamePace           String    @default("quick") @map("game_pace")
+  gameStatus         GameStatus @map("game_status")
+  currentPlayerIndex Int       @map("current_player_index")
+  penaltyCardsCount  Int       @map("penalty_cards_count")
+  activeSuit         Suit?     @map("active_suit")
+  debugMode          String?   @map("debug_mode")
+  hasDrawnThisTurn   Boolean   @map("has_drawn_this_turn")
+  reshuffleCount     Int       @map("reshuffle_count")
+  bridgeAvailable    Boolean   @map("bridge_available")
+  bridgePlayerId     String?   @map("bridge_player_id")
+  isOpeningTurn      Boolean   @map("is_opening_turn")
+  gameStartedAtMs    BigInt?   @map("game_started_at_ms")
+  gameFinishedAtMs   BigInt?   @map("game_finished_at_ms")
+  winnerId           String?   @map("winner_id")
+  winnerName         String?   @map("winner_name")
+
+  host        User              @relation("RoomHost", fields: [hostId], references: [id], onDelete: Restrict)
+  players     RoomPlayer[]
+  cards       RoomCard[]
+  readyPlayers RoomReadyPlayer[]
+  rounds      RoomRound[]
+
+  @@map("rooms")
+}
+
+model RoomPlayer {
+  roomId    String   @map("room_id") @db.Uuid
+  playerId  String   @map("player_id")
+  name      String
+  playerType UserType @map("player_type")
+  score     Int
+  isLeaver  Boolean  @default(false) @map("is_leaver")
+  turnOrder Int      @map("turn_order")
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@id([roomId, playerId])
+  @@unique([roomId, turnOrder], map: "room_players_room_id_turn_order_key")
+  @@index([playerId], map: "room_players_player_id_idx")
+  @@map("room_players")
+}
+
+model RoomCard {
+  id            BigInt           @id @default(autoincrement())
+  roomId         String           @map("room_id") @db.Uuid
+  location       RoomCardLocation
+  ownerPlayerId  String?          @map("owner_player_id")
+  position       Int
+  suit           Suit
+  rank           String
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, location, ownerPlayerId, position], map: "room_cards_room_location_owner_position_key")
+  @@index([roomId], map: "room_cards_room_id_idx")
+  @@map("room_cards")
+}
+
+model RoomReadyPlayer {
+  roomId   String @map("room_id") @db.Uuid
+  playerId String @map("player_id")
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@id([roomId, playerId])
+  @@map("room_ready_players")
+}
+
+model RoomRound {
+  id         BigInt  @id @default(autoincrement())
+  roomId     String  @map("room_id") @db.Uuid
+  roundIndex Int     @map("round_index")
+
+  room    Room            @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  entries RoomRoundEntry[]
+
+  @@unique([roomId, roundIndex], map: "room_rounds_room_id_round_index_key")
+  @@index([roomId], map: "room_rounds_room_id_idx")
+  @@map("room_rounds")
+}
+
+model RoomRoundEntry {
+  roundId     BigInt              @map("round_id")
+  entryOrder  Int                 @map("entry_order")
+  playerId    String              @map("player_id")
+  scoreChange Int                 @map("score_change")
+  totalScore  Int                 @map("total_score")
+  eventType   RoundScoreEventType? @map("event_type")
+
+  round RoomRound @relation(fields: [roundId], references: [id], onDelete: Cascade)
+
+  @@id([roundId, entryOrder])
+  @@index([playerId], map: "room_round_entries_player_id_idx")
+  @@map("room_round_entries")
+}
+
+model ClosedGame {
+  archiveId       String     @id @default(uuid()) @map("archive_id") @db.Uuid
+  roomId          String     @map("room_id") @db.Uuid
+  name            String
+  hostId          String     @map("host_id")
+  gameStatus      GameStatus @map("game_status")
+  roundsPlayed    Int        @map("rounds_played")
+  createdAtMs     BigInt?    @map("created_at_ms")
+  gameStartedAtMs BigInt?    @map("game_started_at_ms")
+  gameFinishedAtMs BigInt?   @map("game_finished_at_ms")
+  closedAtMs      BigInt     @map("closed_at_ms")
+  closedReasonCode String?   @map("closed_reason_code")
+  closedReasonParams Json?   @map("closed_reason_params")
+
+  players ClosedGamePlayer[]
+
+  @@index([roomId], map: "closed_games_room_id_idx")
+  @@index([closedAtMs], map: "closed_games_closed_at_ms_idx")
+  @@map("closed_games")
+}
+
+model ClosedGamePlayer {
+  archiveId  String   @map("archive_id") @db.Uuid
+  playerOrder Int     @map("player_order")
+  playerId   String   @map("player_id")
+  name       String
+  score      Int
+  playerType UserType @map("player_type")
+  isLeaver   Boolean  @default(false) @map("is_leaver")
+
+  closedGame ClosedGame @relation(fields: [archiveId], references: [archiveId], onDelete: Cascade)
+
+  @@id([archiveId, playerOrder])
+  @@index([playerId], map: "closed_game_players_player_id_idx")
+  @@map("closed_game_players")
+}
+
+model AccountDeletionRequest {
+  requestId   String  @id @map("request_id")
+  email       String
+  userId      String? @map("user_id")
+  displayName String? @map("display_name")
+  notes       String?
+  locale      String
+  source      String
+  createdAtMs BigInt  @map("created_at_ms")
+
+  @@index([email], map: "account_deletion_requests_email_idx")
+  @@index([createdAtMs], map: "account_deletion_requests_created_at_ms_idx")
+  @@map("account_deletion_requests")
+}

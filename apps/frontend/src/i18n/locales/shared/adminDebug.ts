@@ -1,0 +1,17 @@
+export const adminDebug = {
+  title: 'Support info',
+  appVersion: 'App: v{{value}}',
+  buildTime: 'Build: {{value}}',
+  env: 'Env: {{value}}',
+  platform: 'Platform: {{value}}',
+  expoSdk: 'Expo SDK: {{value}}',
+  api: 'API: {{value}}',
+  socket: 'Socket: {{value}}',
+  user: 'User: {{value}}',
+  connected: 'connected',
+  disconnected: 'disconnected',
+  notLoggedIn: 'not logged in',
+  local: 'local',
+  staging: 'staging',
+  production: 'production',
+} as const;

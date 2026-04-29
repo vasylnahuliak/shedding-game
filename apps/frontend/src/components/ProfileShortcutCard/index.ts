@@ -1,0 +1,1 @@
+export { ProfileShortcutCard } from './ProfileShortcutCard';

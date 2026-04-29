@@ -1,0 +1,30 @@
+{
+  "name": "@shedding-game/shared",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "22.22.2"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch --preserveWatchOutput",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lodash.shuffle": "^4.2.0",
+    "valibot": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/lodash.shuffle": "^4.2.9"
+  }
+}

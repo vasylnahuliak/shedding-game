@@ -1,0 +1,1 @@
+export { RenameBotModalContent } from './RenameBotModal';

@@ -1,0 +1,160 @@
+const game = {
+  center: {
+    yourTurn: 'Your turn!',
+    currentTurn: 'Turn: {{name}}',
+    draw: 'Draw',
+    drawMore: 'Draw more',
+    pass: 'Pass',
+    drawPenalty: 'Draw {{count}} 🃏',
+    play: 'Play',
+    playWithCount: 'Play ({{count}})',
+    emptyPile: 'Empty',
+    bridgeHint: 'Bridge {{pileCount}}+{{handCount}}',
+    turnTimerTitle: 'Turn timer',
+    turnTimerTitleCompact: 'Timer',
+    turnTimerInfoBadge: 'Game is waiting',
+    turnTimerOtherPlayerTitle: '{{name}} has not moved yet',
+    turnTimerOtherPlayerTitleFallback: 'The current player has not moved yet',
+    turnTimerOtherPlayerRemaining: '{{time}} left',
+    turnTimerOtherPlayerExpired: 'Switching to bot',
+    turnTimerHint:
+      'If you do not move before the timer ends, you will be removed from the game and a bot will continue the round.',
+    turnTimerHintCompact: 'Move in time or a bot will continue for you.',
+    turnTimerOtherPlayerHint:
+      'If {{name}} does not move, the game will continue automatically and a bot will take over for them.',
+    turnTimerOtherPlayerHintFallback:
+      'If no move is made, the game will continue automatically and a bot will take over for this player.',
+    turnTimerExpired: 'Time is up',
+    opening: {
+      topSix: 'Opening turn: random card is 6. Cover it according to game rules',
+      topSeven: 'Opening turn: random card is 7. Add another 7 or pass penalty',
+      default: 'Opening turn: random card is on table. Continue or press Pass',
+    },
+    openingCompact: {
+      topSix: '6 on table. Cover it.',
+      topSeven: '7 on table. Add 7 or pass.',
+      default: 'Start: play or Pass.',
+    },
+  },
+  suitPicker: {
+    title: 'Choose suit',
+    subtitle: 'Set the suit that the next card should follow.',
+  },
+  bridgeModal: {
+    title: '🌉 Bridge!',
+    subtitle: '4 cards of the same rank in discard!',
+    description:
+      'Apply bridge to end the round with ×{{scoreMultiplier}} multiplier.\nAll players (including you) will receive points.',
+    apply: 'Apply bridge',
+    decline: 'Decline',
+  },
+  discardPile: {
+    title_one: 'Discard ({{count}} card)',
+    title_few: 'Discard ({{count}} cards)',
+    title_many: 'Discard ({{count}} cards)',
+    title_other: 'Discard ({{count}} cards)',
+    empty: 'Empty',
+  },
+  opponents: {
+    leaverSuffix: '(bot)',
+    score: '{{count}} points',
+    scoreEliminated: '{{count}} points 💀',
+  },
+  playerHand: {
+    score: '{{count}} points',
+    scoreEliminated: '{{count}} points 💀 Eliminated',
+  },
+  roundOver: {
+    title: 'Round {{round}}',
+    subtitle: 'Check the discard, hands, and scores before the next round.',
+    ready: 'Ready for next round!',
+    allReady: "Everyone is ready - let's go! 🎮",
+    readyBadge: '✓ Ready',
+    waitingBadge: 'waiting',
+    botSuffix: ' (bot)',
+  },
+  gameOver: {
+    win: '🏆 You won!',
+    lose: '😔 You lost',
+    winner: 'Winner: {{name}}',
+    playAgain: 'Play again',
+    leaveRoom: 'Leave room',
+  },
+  scoreModal: {
+    title: 'Scoreboard',
+  },
+  infoModal: {
+    title: 'Additional info',
+    tips: [
+      'Tap the discard pile to see the last 4 cards - this helps you read the game better.',
+      'You can change emoji by long-pressing a reaction button a bit longer than usual.',
+      'If there are more than two players and someone loses, that player can stay in the room and watch.',
+      'If the game is finished, the host can automatically create a room with the same players.',
+      'For practice, you can always create a room with bots.',
+      'If there are two players and one fully finishes the game, the other player is automatically the winner.',
+      'If there are more than two players and one fully finishes the game, the current round is finished by a bot. After round end, this player is fully eliminated.',
+      'The game ends if no actions are made for {{hours}} {{hoursLabel}}.',
+    ],
+  },
+  rules: {
+    title: 'Game rules',
+    sectionBasics: 'Basics',
+    sectionSpecialCards: 'Special cards',
+    sectionScores: 'Scoring',
+    sectionBridge: 'Bridge',
+    close: 'Got it',
+    baseRules: [
+      'Discard all cards from your hand to win the round',
+      'Card must match by suit or rank',
+      'You can play multiple cards of the same rank at once',
+    ],
+    bridgeRules: [
+      'If the last four cards in discard have the same rank, you can apply bridge',
+      'Bridge ends the round and doubles points for all players',
+      'If bridge is applied after deck reshuffle, score multiplier increases by one.',
+      'Bridge works for these ranks: 10, J, Q, K, A',
+    ],
+    specialCards: {
+      six: 'Take another turn by suit (cannot finish round)',
+      seven: 'Next player draws 2 (or plays 7)',
+      eight: 'Next player automatically draws 1 card for each 8',
+      jack: 'Playable on any card, choose suit. Finishing with jacks = -20 per opponent',
+      ace: 'Next player skips turn',
+    },
+    scoringCards: {
+      zero: '0 points',
+      ten: '10 points',
+      twenty: '20 points',
+      fifteen: '15 points',
+    },
+    scoringRules: [
+      'Winning with jacks = -20 points per opponent',
+      'Exactly 115 points resets to 0',
+      '125+ points = eliminated. Last remaining player wins',
+      'If deck runs out, it is reshuffled and game continues. Points are doubled.',
+      'If deck is reshuffled multiple times, score multiplier increases for each reshuffle.',
+    ],
+  },
+  roundMultiplier: {
+    base: 'Base multiplier: ×1',
+    reshuffle: 'Reshuffle: +1× each ({{count}}×) = +{{count}}×',
+    bridge: 'Bridge by {{name}}: +1×',
+    final: 'Final multiplier: ×{{count}}',
+  },
+  roundModifiers: {
+    bridge: '🌉 Bridge by {{name}} - points ×{{multiplier}}',
+    reshuffle: '🔀 Deck reshuffled {{count}}×',
+    reshuffleWithMultiplier: ' - points ×{{multiplier}}',
+  },
+  scoreTable: {
+    leaverSuffix: '(left)',
+  },
+  loading: {
+    title: 'Loading...',
+    subtitle: 'Preparing the card table',
+  },
+  hoursLabel_one: 'hour',
+  hoursLabel_other: 'hours',
+} as const;
+
+export default game;

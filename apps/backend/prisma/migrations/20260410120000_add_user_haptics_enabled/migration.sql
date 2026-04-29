@@ -1,0 +1,2 @@
+ALTER TABLE "users"
+ADD COLUMN "haptics_enabled" BOOLEAN NOT NULL DEFAULT true;

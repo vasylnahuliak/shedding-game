@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shedding Game</title>
+    <meta
+      name="description"
+      content="Shedding Game mobile app links, privacy policy, and terms of use."
+    />
+    <meta name="theme-color" content="#123c24" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #123c24;
+        --bg-accent: #184b2c;
+        --card: rgba(24, 75, 44, 0.92);
+        --card-border: rgba(247, 242, 231, 0.14);
+        --text: #f7f4ed;
+        --text-muted: #d7ddd5;
+        --accent: #e1bc47;
+        --accent-strong: #f0cc62;
+        --halo: rgba(103, 201, 143, 0.14);
+        --shadow: rgba(3, 12, 7, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'SF Pro Display', 'Segoe UI', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, var(--halo), transparent 32%),
+          linear-gradient(180deg, var(--bg-accent), var(--bg));
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      main {
+        width: min(720px, 100%);
+        border: 1px solid var(--card-border);
+        border-radius: 28px;
+        background: var(--card);
+        box-shadow: 0 24px 70px var(--shadow);
+        padding: 28px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 14px;
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(34px, 7vw, 54px);
+        line-height: 0.95;
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .panel {
+        margin-top: 26px;
+        padding: 18px;
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        background: rgba(247, 242, 231, 0.05);
+      }
+
+      .path {
+        margin-top: 10px;
+        color: var(--accent-strong);
+        font-weight: 700;
+        word-break: break-word;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .button,
+      .link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button {
+        background: var(--accent);
+        color: #18220f;
+      }
+
+      .link {
+        border: 1px solid var(--card-border);
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="eyebrow">Mobile App Surface</span>
+      <h1>Shedding Game</h1>
+      <p>
+        This website hosts legal pages and hands off supported links to the native app. The game
+        itself is available only on iOS and Android.
+      </p>
+
+      <section class="panel">
+        <p id="deep-link-status">
+          Use the mobile app to play. This website only hosts legal pages and deep-link handoff.
+        </p>
+        <div class="path" id="deep-link-path">/</div>
+        <div class="actions">
+          <a id="open-app-link" class="button" href="sheddinggameapp://">Open App</a>
+          <a class="link" href="/account-deletion/">Delete Account</a>
+          <a class="link" href="/terms/">Terms of Use</a>
+          <a class="link" href="/privacy-policy/">Privacy Policy</a>
+        </div>
+      </section>
+    </main>
+    <script src="/site.js" defer></script>
+  </body>
+</html>

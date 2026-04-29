@@ -1,0 +1,15 @@
+{
+  "pattern": "{apps,packages}/**/*.{ts,tsx}",
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "apps/frontend/src/components/ui/**",
+    "**/apps/frontend/src/components/ui/**"
+  ],
+  "gitignore": true,
+  "reporters": ["html", "console"],
+  "output": "./reports/jscpd",
+  "threshold": 0,
+  "minLines": 5,
+  "minTokens": 40
+}

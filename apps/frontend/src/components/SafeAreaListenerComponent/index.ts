@@ -1,0 +1,1 @@
+export { SafeAreaListenerComponent } from './SafeAreaListenerComponent';

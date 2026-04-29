@@ -1,0 +1,1 @@
+export { AccountDeletionRequestCard } from './AccountDeletionRequestCard';

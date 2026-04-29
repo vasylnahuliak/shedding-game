@@ -1,0 +1,1 @@
+export { OpponentsArea } from './OpponentsArea';
