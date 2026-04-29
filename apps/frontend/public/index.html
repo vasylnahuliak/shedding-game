@@ -89,6 +89,49 @@
         word-break: break-word;
       }
 
+      .store-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .store-link {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 8px;
+        line-height: 0;
+        transition:
+          filter 160ms ease,
+          transform 160ms ease;
+      }
+
+      .store-link:hover {
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+      }
+
+      .store-link:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 3px;
+      }
+
+      .store-badge {
+        display: block;
+        height: 60px;
+        max-width: 100%;
+        width: auto;
+      }
+
+      .app-store-badge {
+        aspect-ratio: 720 / 241;
+      }
+
+      .google-play-badge {
+        aspect-ratio: 572 / 172;
+      }
+
       .actions {
         display: flex;
         flex-wrap: wrap;
@@ -132,6 +175,36 @@
         <p id="deep-link-status">
           Use the mobile app to play. This website only hosts legal pages and deep-link handoff.
         </p>
+        <div class="store-links" aria-label="Download Shedding Game">
+          <a
+            class="store-link"
+            href="https://apps.apple.com/pt/app/shedding-game/id6761338980"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="store-badge app-store-badge"
+              src="./app-store-badge.png"
+              width="720"
+              height="241"
+              alt="Download on the App Store"
+            />
+          </a>
+          <a
+            class="store-link"
+            href="https://play.google.com/store/apps/details?id=com.vasylnahuliak.sheddinggame&amp;hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="store-badge google-play-badge"
+              src="./google-play-badge.png"
+              width="572"
+              height="172"
+              alt="Get it on Google Play"
+            />
+          </a>
+        </div>
         <div class="path" id="deep-link-path">/</div>
         <div class="actions">
           <a id="open-app-link" class="button" href="sheddinggameapp://">Open App</a>
