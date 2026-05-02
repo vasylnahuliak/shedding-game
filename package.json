@@ -37,6 +37,8 @@
     "build:backend": "turbo run build --filter=shedding-game-backend",
     "deploy:oracle": "bash deploy/oracle/compose-env.sh",
     "expo:doctor": "npm exec --workspace shedding-game-frontend expo-doctor",
+    "expo:install": "npm exec --workspace shedding-game-frontend -- expo install --check && npm install",
+    "expo:fix": "npm exec --workspace shedding-game-frontend -- expo install --fix && npm install",
     "i18n:check": "bash scripts/check-i18n.sh",
     "fix": "npm run unused:fix; npm run typecheck; npm run lint:fix; npm run format; npm run cpd",
     "typecheck": "turbo run typecheck",
