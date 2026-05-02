@@ -22,7 +22,7 @@ module.exports = () => {
     'development';
 
   return {
-    name: 'shedding-game-frontend',
+    name: 'Shedding Game',
     slug: 'shedding-game',
     version: '1.0.0',
     orientation: 'portrait',
