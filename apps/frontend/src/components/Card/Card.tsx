@@ -38,8 +38,8 @@ export function Card({
     transparent
       ? 'border-overlay-scrim bg-transparent'
       : selected
-        ? 'border-border-accent bg-white'
-        : 'border-border-card-face bg-white'
+        ? 'border-border-accent bg-surface-card-face'
+        : 'border-border-card-face bg-surface-card-face'
   );
   const cornerTextClassName = mergeClassNames(
     metricClassNames?.cornerText,
