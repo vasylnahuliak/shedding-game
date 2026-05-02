@@ -10,8 +10,6 @@
     "dev": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "run:android": "expo run:android",
-    "run:ios": "expo run:ios",
     "build:ios": "sh ./scripts/with-secrets.sh eas build --local --platform ios --profile production",
     "build:android": "sh ./scripts/with-secrets.sh eas build --local --platform android --profile production",
     "prebuild:clean": "expo prebuild --clean",
