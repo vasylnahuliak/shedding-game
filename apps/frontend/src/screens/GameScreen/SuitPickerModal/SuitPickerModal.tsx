@@ -25,8 +25,7 @@ export const SuitPickerModal = function SuitPickerModal() {
             <Pressable
               key={suit}
               className={mergeClassNames(
-                'h-24 min-w-0 flex-1 items-center justify-center rounded-[20px] border-2 bg-surface-card-face',
-                isRed ? 'border-feedback-danger' : 'border-border-card-face',
+                'h-24 min-w-0 flex-1 items-center justify-center rounded-[20px] bg-surface-card-face',
                 shadowClassNames.raised
               )}
               onPress={() => handleSuitSelect(suit)}
