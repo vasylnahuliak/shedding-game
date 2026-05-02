@@ -103,7 +103,7 @@ const darkTheme = createAppTheme('dark', {
     iconButtonDanger: overlay.dangerSoft,
     buttonDisabled: '#496756',
     cardClosed: '#314636',
-    cardFace: palette.paper,
+    cardFace: '#FFFFFF',
     action: palette.teal,
   },
   text: {

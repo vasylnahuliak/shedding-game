@@ -1,4 +1,4 @@
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
@@ -12,6 +12,12 @@ import {
   SMALL_CARD_METRICS,
 } from './Card.settings';
 import type { CardProps } from './Card.types';
+
+const styles = StyleSheet.create({
+  cardFace: {
+    backgroundColor: '#FFFFFF',
+  },
+});
 
 export function Card({
   card,
@@ -38,8 +44,8 @@ export function Card({
     transparent
       ? 'border-overlay-scrim bg-transparent'
       : selected
-        ? 'border-border-accent bg-surface-card-face'
-        : 'border-border-card-face bg-surface-card-face'
+        ? 'border-border-accent bg-[#FFFFFF]'
+        : 'border-border-card-face bg-[#FFFFFF]'
   );
   const cornerTextClassName = mergeClassNames(
     metricClassNames?.cornerText,
@@ -48,14 +54,19 @@ export function Card({
     disabled && 'opacity-60'
   );
   const cardStyle = metricClassNames
-    ? undefined
-    : {
-        width: resolvedMetrics.width,
-        height: resolvedMetrics.height,
-        borderRadius: resolvedMetrics.borderRadius,
-        padding: resolvedMetrics.padding,
-        borderWidth: selected ? resolvedMetrics.selectedBorderWidth : 1,
-      };
+    ? transparent
+      ? undefined
+      : styles.cardFace
+    : [
+        {
+          width: resolvedMetrics.width,
+          height: resolvedMetrics.height,
+          borderRadius: resolvedMetrics.borderRadius,
+          padding: resolvedMetrics.padding,
+          borderWidth: selected ? resolvedMetrics.selectedBorderWidth : 1,
+        },
+        transparent ? undefined : styles.cardFace,
+      ];
   const cornerTextStyle = metricClassNames
     ? undefined
     : {

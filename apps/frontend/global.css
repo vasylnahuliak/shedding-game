@@ -54,7 +54,7 @@
     --surface-icon-button-danger: rgba(243, 123, 107, 0.18);
     --surface-button-disabled: #496756;
     --surface-card-closed: #314636;
-    --surface-card-face: 255 244 223;
+    --surface-card-face: 255 255 255;
     --surface-action: 47 158 92;
 
     /* ── Text ── */
@@ -150,7 +150,7 @@
       --surface-icon-button-danger: rgba(243, 123, 107, 0.18);
       --surface-button-disabled: #496756;
       --surface-card-closed: #314636;
-      --surface-card-face: 255 244 223;
+      --surface-card-face: 255 255 255;
       --surface-action: 47 158 92;
 
       --text-primary: 255 249 240;
