@@ -44,11 +44,9 @@ const buildGameHistoryClosedGameWhere = (options?: {
   filters?: GameHistoryFilters;
 }): Prisma.ClosedGameWhereInput | undefined => {
   return combineGameHistoryWhere<Prisma.ClosedGameWhereInput>(
-    buildGameHistoryMembershipWhere(options?.userId) as Prisma.ClosedGameWhereInput | undefined,
-    buildGameHistoryPlayerTypeWhere(options?.filters) as Prisma.ClosedGameWhereInput | undefined,
-    buildGameHistoryStartedWhere(options?.filters, 'gameStartedAtMs') as
-      | Prisma.ClosedGameWhereInput
-      | undefined
+    buildGameHistoryMembershipWhere(options?.userId),
+    buildGameHistoryPlayerTypeWhere(options?.filters),
+    buildGameHistoryStartedWhere(options?.filters, 'gameStartedAtMs')
   );
 };
 

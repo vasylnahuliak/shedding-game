@@ -71,11 +71,9 @@ export const buildGameHistoryRoomWhere = (options?: {
         in: ['waiting', 'playing', 'round_over'],
       },
     },
-    buildGameHistoryMembershipWhere(options?.userId) as Prisma.RoomWhereInput | undefined,
-    buildGameHistoryPlayerTypeWhere(options?.filters) as Prisma.RoomWhereInput | undefined,
-    buildGameHistoryStartedWhere(options?.filters, 'gameStartedAtMs') as
-      | Prisma.RoomWhereInput
-      | undefined
+    buildGameHistoryMembershipWhere(options?.userId),
+    buildGameHistoryPlayerTypeWhere(options?.filters),
+    buildGameHistoryStartedWhere(options?.filters, 'gameStartedAtMs')
   );
 };
 

@@ -1,20 +1,6 @@
-import type {
-  Prisma,
-  RoundScoreEventType,
-  Suit as PrismaSuit,
-  UserType as PrismaUserType,
-} from '@prisma/client';
+import type { Prisma, RoundScoreEventType, Suit as PrismaSuit } from '@prisma/client';
 import { RoomCardLocation } from '@prisma/client';
-import type {
-  BackendMessageCode,
-  Card,
-  DebugMode,
-  GamePace,
-  GameStatus,
-  Rank,
-  Suit,
-  UserType,
-} from '@shedding-game/shared';
+import type { BackendMessageCode, Card, DebugMode, GamePace, Rank } from '@shedding-game/shared';
 
 import { DEFAULT_GAME_PACE } from '@shedding-game/shared';
 
@@ -48,23 +34,23 @@ const toBigInt = (value: number | null | undefined): bigint | null => {
 
 const mapEventTypeFromDb = (eventType: RoundScoreEventType | null): RoundScoreEvent | undefined => {
   if (!eventType) return undefined;
-  return { type: eventType as RoundScoreEvent['type'] };
+  return { type: eventType };
 };
 
 const mapEventTypeToDb = (event?: RoundScoreEvent): RoundScoreEventType | null => {
   if (!event) return null;
-  return event.type as RoundScoreEventType;
+  return event.type;
 };
 
 const mapCardFromDb = (card: { suit: PrismaSuit; rank: string }): Card => {
   return {
-    suit: card.suit as Suit,
+    suit: card.suit,
     rank: card.rank as Rank,
   };
 };
 
 const mapCardToDb = (card: Card): { suit: PrismaSuit; rank: string } => ({
-  suit: card.suit as PrismaSuit,
+  suit: card.suit,
   rank: card.rank,
 });
 
@@ -108,7 +94,7 @@ export const mapRoomFromDb = (record: RoomRecord): Room => {
     players: record.players.map((player) => ({
       id: player.playerId,
       name: player.name,
-      playerType: player.playerType as UserType,
+      playerType: player.playerType,
       hand: handCards.get(player.playerId) ?? [],
       score: player.score,
       isLeaver: player.isLeaver || undefined,
@@ -116,9 +102,9 @@ export const mapRoomFromDb = (record: RoomRecord): Room => {
     deck,
     discardPile,
     currentPlayerIndex: record.currentPlayerIndex,
-    gameStatus: record.gameStatus as GameStatus,
+    gameStatus: record.gameStatus,
     penaltyCardsCount: record.penaltyCardsCount,
-    activeSuit: (record.activeSuit as Suit | null) ?? null,
+    activeSuit: record.activeSuit ?? null,
     debugMode: (record.debugMode as DebugMode | undefined) ?? undefined,
     hasDrawnThisTurn: record.hasDrawnThisTurn,
     scoreHistory,
@@ -143,7 +129,7 @@ export const mapRoomToDb = (room: Room) => {
     roomId: room.id,
     playerId: player.id,
     name: player.name,
-    playerType: player.playerType as PrismaUserType,
+    playerType: player.playerType,
     score: player.score,
     isLeaver: Boolean(player.isLeaver),
     turnOrder,
@@ -226,7 +212,7 @@ export const mapRoomToDb = (room: Room) => {
       gameStatus: room.gameStatus,
       currentPlayerIndex: room.currentPlayerIndex,
       penaltyCardsCount: room.penaltyCardsCount,
-      activeSuit: room.activeSuit as PrismaSuit | null,
+      activeSuit: room.activeSuit,
       debugMode: room.debugMode ?? null,
       hasDrawnThisTurn: room.hasDrawnThisTurn,
       reshuffleCount: room.reshuffleCount,
@@ -275,7 +261,7 @@ export const mapClosedGameToDb = (
       playerId: player.id,
       name: player.name,
       score: player.score,
-      playerType: player.playerType as PrismaUserType,
+      playerType: player.playerType,
       isLeaver: Boolean(player.isLeaver),
     })),
   };
@@ -287,12 +273,12 @@ export const mapClosedGameFromDb = (record: ClosedGameRecord): ClosedGame => {
     roomId: record.roomId,
     name: record.name,
     hostId: record.hostId,
-    gameStatus: record.gameStatus as GameStatus,
+    gameStatus: record.gameStatus,
     players: record.players.map((player) => ({
       id: player.playerId,
       name: player.name,
       score: player.score,
-      playerType: player.playerType as UserType,
+      playerType: player.playerType,
       isLeaver: player.isLeaver || undefined,
     })),
     roundsPlayed: record.roundsPlayed,

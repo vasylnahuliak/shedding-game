@@ -24,7 +24,7 @@ export const getRoundReadyData = (room: Room) => {
 };
 
 const getTypedGamePaceConfig = (gamePace: Room['gamePace']): GamePaceConfigLike =>
-  getGamePaceConfig(gamePace) as GamePaceConfigLike;
+  getGamePaceConfig(gamePace);
 
 const getTurnTimeoutDelayMs = (turnStartedAt: number, gamePace: Room['gamePace']): number => {
   const { kickDelayMs } = getTypedGamePaceConfig(gamePace);

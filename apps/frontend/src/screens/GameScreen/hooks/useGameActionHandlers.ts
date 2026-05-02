@@ -32,7 +32,8 @@ type UseGameActionHandlersParams = {
   setDrawButtonDisabled: (isDisabled: boolean) => void;
   clearDrawButtonTimeout: () => void;
   drawButtonTimeoutRef: RefObject<ReturnType<typeof setTimeout> | null>;
-  suppressBridgeRef: RefObject<boolean>;
+  suppressBridge: boolean;
+  setSuppressBridge: (value: boolean) => void;
 };
 
 export function useGameActionHandlers({
@@ -54,7 +55,8 @@ export function useGameActionHandlers({
   setDrawButtonDisabled,
   clearDrawButtonTimeout,
   drawButtonTimeoutRef,
-  suppressBridgeRef,
+  suppressBridge,
+  setSuppressBridge,
 }: UseGameActionHandlersParams) {
   const router = useRouter();
 
@@ -97,7 +99,7 @@ export function useGameActionHandlers({
       playSelectionHaptic();
       SocketService.emit('make_move', { roomId, cards: selectedCards, chosenSuit: suit });
 
-      if (suppressBridgeRef.current) {
+      if (suppressBridge) {
         SocketService.emit('decline_bridge', { roomId });
       }
 
@@ -204,7 +206,7 @@ export function useGameActionHandlers({
 
     playSelectionHaptic();
     setPendingBridgeJack(false);
-    suppressBridgeRef.current = true;
+    setSuppressBridge(true);
     setSuitPickerMode('play');
   };
 
@@ -220,7 +222,7 @@ export function useGameActionHandlers({
     handlePlayAgain,
     handleBridgeApply,
     handleBridgeDecline,
-    isBridgeModalVisible: pendingBridgeJack || (canApplyBridge && !suppressBridgeRef.current),
+    isBridgeModalVisible: pendingBridgeJack || (canApplyBridge && !suppressBridge),
     bridgeScoreMultiplier: (room?.reshuffleCount || 0) + 2,
   };
 }

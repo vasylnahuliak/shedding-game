@@ -18,7 +18,7 @@ function getHandCount(player: Player | undefined): number {
 /** Helper to get hands as Card[] for player comparison */
 function getHandAsArray(player: Player | undefined): CardType[] {
   if (!player) return [];
-  return Array.isArray(player.hand) ? (player.hand as CardType[]) : [];
+  return Array.isArray(player.hand) ? player.hand : [];
 }
 
 /** Get prev and new hands for a player */

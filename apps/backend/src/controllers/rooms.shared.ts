@@ -44,7 +44,7 @@ export const err = <Code extends BackendMessageCode>(
   };
 
   if (params !== undefined) {
-    result.params = params as Record<string, string | number>;
+    result.params = params;
   }
 
   return result;

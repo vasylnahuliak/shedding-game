@@ -29,7 +29,7 @@ const gameError = <Code extends BackendMessageCode>(
 
   return {
     code,
-    params: params as Record<string, string | number>,
+    params: params,
   };
 };
 

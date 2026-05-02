@@ -1,5 +1,5 @@
 export type OAuthProviderId = 'google' | 'apple';
-export type AuthMethodId = 'email' | OAuthProviderId;
+type AuthMethodId = 'email' | OAuthProviderId;
 
 export type AuthMethod = {
   id: AuthMethodId;

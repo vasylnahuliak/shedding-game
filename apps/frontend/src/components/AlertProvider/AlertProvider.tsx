@@ -144,8 +144,7 @@ export function AlertProvider({ children }: { children: React.ReactNode }) {
 
 export function AlertViewport() {
   const { currentAlert, hideAlert, activeHostId, registerHost, unregisterHost } = useAlert();
-  const hostIdRef = useRef<number>(++nextAlertHostId);
-  const hostId = hostIdRef.current;
+  const [hostId] = useState<number>(() => ++nextAlertHostId);
 
   useEffect(
     function registerAlertViewportHost() {

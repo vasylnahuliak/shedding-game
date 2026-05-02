@@ -19,7 +19,7 @@ export type AuthStep =
   | 'forgotPassword'
   | 'resetPassword';
 
-export type OAuthLoadingAction = `oauth-${OAuthProviderId}`;
+type OAuthLoadingAction = `oauth-${OAuthProviderId}`;
 export type AuthAction =
   | 'emailLink'
   | 'login'

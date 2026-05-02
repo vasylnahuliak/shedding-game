@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { BackHandler } from 'react-native';
 
 import type { Card as CardType } from '@shedding-game/shared';
@@ -47,7 +47,7 @@ export const useGameScreenController = () => {
   const setPendingBridgeJack = useGameUiStore((state) => state.setPendingBridgeJack);
   const setDrawButtonDisabled = useGameUiStore((state) => state.setDrawButtonDisabled);
   const resetGameUiStore = useGameUiStore((state) => state.reset);
-  const suppressBridgeRef = useRef(false);
+  const [suppressBridge, setSuppressBridge] = useState(false);
   const drawButtonTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const currentGameModalRouteName = getGameModalRouteName(pathname);
   const layoutMetrics = gameLayoutMetrics;
@@ -98,7 +98,7 @@ export const useGameScreenController = () => {
   });
 
   const resetBridgeSuppression = useCallback(() => {
-    suppressBridgeRef.current = false;
+    setSuppressBridge(false);
   }, []);
 
   useGameRoomSync({
@@ -220,7 +220,8 @@ export const useGameScreenController = () => {
     setDrawButtonDisabled,
     clearDrawButtonTimeout,
     drawButtonTimeoutRef,
-    suppressBridgeRef,
+    suppressBridge,
+    setSuppressBridge,
   });
 
   return {

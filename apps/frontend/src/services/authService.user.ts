@@ -114,7 +114,7 @@ export const refreshAuthMethods = async (): Promise<AuthMethod[]> => {
   return buildAuthMethods({
     primaryProvider: data.user.app_metadata.provider,
     linkedProviders: data.user.app_metadata.providers,
-    identities: data.user.identities as SupabaseIdentity[] | undefined,
+    identities: data.user.identities,
   });
 };
 

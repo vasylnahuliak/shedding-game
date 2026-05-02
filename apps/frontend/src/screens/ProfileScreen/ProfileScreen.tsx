@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 
-import type { Href } from 'expo-router';
 import { useRouter } from 'expo-router';
 
 /* jscpd:ignore-start */
@@ -51,15 +50,15 @@ export const ProfileScreen = () => {
   }, []);
 
   const openSettings = () => {
-    router.push('/profile-settings' as Href);
+    router.push('/profile-settings');
   };
 
   const openStats = () => {
-    router.push('/profile-stats' as Href);
+    router.push('/profile-stats');
   };
 
   const openAdmin = () => {
-    router.push('/admin' as Href);
+    router.push('/admin');
   };
 
   const handleLogout = async () => {
@@ -68,7 +67,7 @@ export const ProfileScreen = () => {
 
     try {
       await logout();
-      router.replace('/' as Href);
+      router.replace('/');
     } catch (logoutActionError) {
       setLogoutError(getAuthServiceErrorMessage(logoutActionError, t('errors:auth.unknown')));
       setPendingAction(null);

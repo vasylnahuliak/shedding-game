@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import type { AppLocale, AppRole } from '@shedding-game/shared';
 
 import { prisma } from '@/db/client';
@@ -133,7 +132,7 @@ export const userRepository = {
     const user = await prisma.user.update({
       where: { id: userId },
       data: {
-        emojiPreferences: updated as Prisma.InputJsonValue,
+        emojiPreferences: updated,
         updatedAtMs: nowMsBigInt(),
       },
       select: userSelect,
@@ -160,7 +159,7 @@ export const userRepository = {
     return updateUser(userId, {
       discardPileExpandedByDefault: enabled,
       updatedAtMs: nowMsBigInt(),
-    } as Prisma.UserUpdateInput);
+    });
   },
 
   async anonymizeDeletedAccountReferences(userId: string): Promise<void> {

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import {
   Easing,
   interpolate,
@@ -95,14 +95,15 @@ export const CenterArea = function CenterArea() {
 
   const [showAllDiscard, setShowAllDiscard] = useState(discardPileExpandedByDefault);
   const [discardAnimationTick, setDiscardAnimationTick] = useState(0);
+  const [previousExpandedByDefault, setPreviousExpandedByDefault] = useState(
+    discardPileExpandedByDefault
+  );
   const maxVisible = showAllDiscard ? MAX_VISIBLE_CARDS : 1;
 
-  useEffect(
-    function syncDiscardPilePreference() {
-      setShowAllDiscard(discardPileExpandedByDefault);
-    },
-    [discardPileExpandedByDefault]
-  );
+  if (previousExpandedByDefault !== discardPileExpandedByDefault) {
+    setPreviousExpandedByDefault(discardPileExpandedByDefault);
+    setShowAllDiscard(discardPileExpandedByDefault);
+  }
 
   const toggleAnim = useDerivedValue(() => {
     if (discardAnimationTick === 0) {
