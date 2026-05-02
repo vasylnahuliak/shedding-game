@@ -14,7 +14,7 @@ const auth = {
     badges: {
       methodChoice: 'Швидкий вхід',
       emailEntry: 'Magic link',
-      emailSent: 'Перевір пошту',
+      emailSent: 'Перевірте пошту',
       passwordFallback: 'Вхід через пароль',
       profile: 'Останній крок',
       forgotPassword: 'Відновлення доступу',
@@ -63,8 +63,8 @@ const auth = {
   hints: {
     passwordMin: 'Пароль: мінімум {{count}} символів',
     passwordLeft: 'Ще {{count}} символ(ів) до мінімуму',
-    passwordValid: 'Пароль валідний',
-    passwordNeedAtLeast: 'Пароль повинен містити щонайменше {{count}} символів',
+    passwordValid: 'Пароль підходить',
+    passwordNeedAtLeast: 'Пароль має містити щонайменше {{count}} символів',
     passwordResetPrivacy:
       'Якщо акаунт для цього email існує, ми надішлемо інструкції для скидання пароля.',
   },
@@ -79,7 +79,7 @@ const auth = {
     apple: 'Продовжити з Apple',
     login: 'Увійти',
     google: 'Продовжити з Google',
-    register: 'Зареєструватись',
+    register: 'Зареєструватися',
     chooseAnotherMethod: 'Обрати інший спосіб',
     sendSignInLink: 'Надіслати посилання',
     resendSignInLink: 'Надіслати ще раз',
@@ -89,7 +89,7 @@ const auth = {
     forgotPassword: 'Забули пароль?',
     sendResetLink: 'Надіслати посилання',
     updatePassword: 'Оновити пароль',
-    backToLogin: 'Повернутись до входу через пароль',
+    backToLogin: 'Повернутися до входу через пароль',
     cancelPasswordRecovery: 'Скасувати і увійти знову',
     forceLogout: 'Вийти з акаунта',
     loading: {
@@ -105,7 +105,7 @@ const auth = {
   },
   footer: {
     text: 'Готові скинути карти?',
-    legalNotice: 'Продовжуючи, ви погоджуєтесь з умовами сервісу.',
+    legalNotice: 'Продовжуючи, ви погоджуєтеся з умовами сервісу.',
     legalSeparator: 'та',
   },
 } as const;

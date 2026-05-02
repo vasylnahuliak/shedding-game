@@ -1,15 +1,15 @@
-# OCI Terraform (Always Free) — infra без “кліків”
+# OCI Terraform (Always Free) — інфраструктура без “кліків”
 
-Цей каталог піднімає **з нуля** (кодом) мінімальну інфраструктуру для деплою стека з `deploy/oracle`:
+Цей каталог створює **з нуля** (кодом) мінімальну інфраструктуру для розгортання стека з `deploy/oracle`:
 
 - VCN + public subnet
 - Internet Gateway + route `0.0.0.0/0`
 - Security List з inbound `22/80/443`
 - ARM інстанс `VM.Standard.A1.Flex` (за замовчуванням `4 OCPU / 24 GB`)
 - Public IPv4 на primary VNIC
-- `cloud-init`: ставить Docker, вмикає `ufw`, відкриває `22/80/443`
+- `cloud-init`: встановлює Docker, вмикає `ufw`, відкриває `22/80/443`
 
-Далі ти деплоїш апку докером за інструкцією з `deploy/oracle/README.md`.
+Далі розгорни застосунок у Docker за інструкцією з `deploy/oracle/README.md`.
 
 ## Варіант А (рекомендовано): запуск Terraform в OCI Cloud Shell
 
@@ -47,7 +47,7 @@ oci setup config
 
 ## Після створення інстанса
 
-1. Підключись по SSH командою з output `ssh_command`.
+1. Підключись через SSH командою з виводу `ssh_command`.
 2. Клонуй репо на VM і підніми стек:
    - `deploy/oracle/README.md`
 
