@@ -36,6 +36,14 @@ type SettingsToggleRowProps = {
   value: boolean;
 };
 
+type SettingsValueRowProps = {
+  description?: string;
+  disabled?: boolean;
+  onPress: () => void;
+  title: string;
+  value: string;
+};
+
 type AuthMethodCardProps = {
   actionTitle: string;
   description?: string;
@@ -46,6 +54,15 @@ type AuthMethodCardProps = {
   statusLabel: string;
   title: string;
 };
+
+const SettingsRowText = ({ description, title }: { description?: string; title: string }) => (
+  <Box className="min-w-0 flex-1 gap-1.5">
+    <Text className="text-[17px] font-extrabold text-text-primary">{title}</Text>
+    {description ? (
+      <Text className="text-[13px] leading-5 text-text-tertiary">{description}</Text>
+    ) : null}
+  </Box>
+);
 
 const SETTINGS_ACTION_TONE_CLASS_NAMES: Record<SettingsActionTone, string> = {
   primary: 'border-border-accent bg-text-accent',
@@ -135,12 +152,7 @@ export const SettingsToggleRow = ({
         disabled && 'opacity-70'
       )}
     >
-      <Box className="min-w-0 flex-1 gap-1.5">
-        <Text className="text-[17px] font-extrabold text-text-primary">{title}</Text>
-        {description ? (
-          <Text className="text-[13px] leading-5 text-text-tertiary">{description}</Text>
-        ) : null}
-      </Box>
+      <SettingsRowText title={title} description={description} />
 
       <AppPressable
         className={mergeClassNames(
@@ -166,6 +178,43 @@ export const SettingsToggleRow = ({
         />
       </AppPressable>
     </Box>
+  );
+};
+
+export const SettingsValueRow = ({
+  description,
+  disabled = false,
+  onPress,
+  title,
+  value,
+}: SettingsValueRowProps) => {
+  return (
+    <AppPressable
+      className={mergeClassNames(
+        panelClassNames.strong,
+        'mb-4 flex-row items-center gap-4 rounded-[24px] p-4',
+        !disabled && surfaceEffectClassNames.raised,
+        disabled && 'opacity-70'
+      )}
+      onPress={onPress}
+      disabled={disabled}
+      accessibilityRole="button"
+      accessibilityLabel={title}
+    >
+      <SettingsRowText title={title} description={description} />
+
+      <Box className="flex-row items-center max-w-[132px] gap-1">
+        <Text
+          className="text-right text-[13px] font-bold leading-5 text-text-accent"
+          numberOfLines={2}
+        >
+          {value}
+        </Text>
+        <Text className="text-[24px] leading-6 text-text-accent" accessible={false}>
+          ›
+        </Text>
+      </Box>
+    </AppPressable>
   );
 };
 

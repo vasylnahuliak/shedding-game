@@ -1,7 +1,9 @@
-import type { GamePace, Rank, Suit } from './types';
+import type { GamePace, Rank, Suit, SuitDisplayMode } from './types';
 
 export const SUITS: Suit[] = ['hearts', 'diamonds', 'clubs', 'spades'];
 export const RANKS: Rank[] = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+export const SUIT_DISPLAY_MODES: SuitDisplayMode[] = ['classic', 'distinct'];
+export const DEFAULT_SUIT_DISPLAY_MODE: SuitDisplayMode = 'classic';
 
 // Bridge ranks - only these ranks can form a bridge (4 cards of same rank in pile)
 export const BRIDGE_RANKS = ['10', 'J', 'Q', 'K', 'A'] as const;

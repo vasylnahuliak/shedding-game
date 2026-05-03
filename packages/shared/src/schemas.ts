@@ -1,7 +1,7 @@
 import * as v from 'valibot';
 
 import { BOT_PERSONA_NAMES, type BotPersonaName } from './botNames';
-import { GAME_PACES, MAX_PLAYER_NAME_LENGTH, RANKS, SUITS } from './constants';
+import { GAME_PACES, MAX_PLAYER_NAME_LENGTH, RANKS, SUIT_DISPLAY_MODES, SUITS } from './constants';
 import { POPULAR_EMOJIS, REACTIONS, type ReactionType } from './game';
 import { SUPPORTED_LOCALES } from './i18n';
 
@@ -28,6 +28,7 @@ const toTrimmedString = (maxLength?: number) =>
 export const SuitSchema = v.picklist([...SUITS]);
 export const RankSchema = v.picklist([...RANKS]);
 export const UserTypeSchema = v.picklist(['human', 'bot']);
+export const SuitDisplayModeSchema = v.picklist([...SUIT_DISPLAY_MODES]);
 export const AppRoleSchema = v.picklist(['player', 'admin', 'super_admin']);
 export const GameStatusSchema = v.picklist(['waiting', 'playing', 'round_over', 'finished']);
 
@@ -84,6 +85,10 @@ export const UpdateHapticsPreferenceBodySchema = v.object({
 
 export const UpdateDiscardPilePreferenceBodySchema = v.object({
   enabled: v.boolean(),
+});
+
+export const UpdateSuitDisplayModeBodySchema = v.object({
+  mode: SuitDisplayModeSchema,
 });
 
 export const AssignUserRoleBodySchema = v.object({

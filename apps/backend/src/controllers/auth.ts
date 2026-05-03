@@ -6,6 +6,7 @@ import {
   UpdateEmojiPreferenceBodySchema,
   UpdateHapticsPreferenceBodySchema,
   UpdateLocaleBodySchema,
+  UpdateSuitDisplayModeBodySchema,
   UpsertProfileBodySchema,
 } from '@shedding-game/shared';
 
@@ -27,6 +28,7 @@ const getValidatedBodyOutput = <TOutput>(
     | 'AUTH_INVALID_LOCALE'
     | 'AUTH_INVALID_HAPTICS_ENABLED'
     | 'AUTH_INVALID_DISCARD_PILE_PREFERENCE'
+    | 'AUTH_INVALID_SUIT_DISPLAY_MODE'
 ): TOutput | null => {
   if (!result.success) {
     apiError(res, authedReq.locale, 400, invalidCode);
@@ -196,5 +198,21 @@ export const updateDiscardPilePreference = async (req: Request, res: Response) =
     authedReq.userId,
     body.enabled
   );
+  respondWithSanitizedUser(authedReq, res, user);
+};
+
+export const updateSuitDisplayMode = async (req: Request, res: Response) => {
+  const authedReq = req as AuthedRequest;
+  const body = getValidatedBodyOutput(
+    authedReq,
+    res,
+    safeParseWithSchema(UpdateSuitDisplayModeBodySchema, req.body),
+    'AUTH_INVALID_SUIT_DISPLAY_MODE'
+  );
+  if (!body) {
+    return;
+  }
+
+  const user = await userRepository.updateSuitDisplayMode(authedReq.userId, body.mode);
   respondWithSanitizedUser(authedReq, res, user);
 };

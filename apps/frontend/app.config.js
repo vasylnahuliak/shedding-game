@@ -1,7 +1,3 @@
-const { AndroidConfig, withAndroidStyles } = require('expo/config-plugins');
-
-const { assignStylesValue, getAppThemeGroup } = AndroidConfig.Styles;
-
 const updateChannelByBuildProfile = {
   development: 'development',
   'android-development': 'development',
@@ -16,19 +12,6 @@ const updateChannelByAppEnv = {
   staging: 'staging',
   production: 'production',
 };
-
-const withAndroidForceDarkDisabled = (config) =>
-  withAndroidStyles(config, (config) => {
-    config.modResults = assignStylesValue(config.modResults, {
-      add: true,
-      parent: getAppThemeGroup(),
-      name: 'android:forceDarkAllowed',
-      value: 'false',
-      targetApi: 'q',
-    });
-
-    return config;
-  });
 
 module.exports = () => {
   const buildProfile = process.env.EAS_BUILD_PROFILE ?? null;
@@ -109,7 +92,7 @@ module.exports = () => {
       'expo-web-browser',
       'expo-localization',
       'expo-apple-authentication',
-      withAndroidForceDarkDisabled,
+      './plugins/withAndroidForceDarkDisabled',
       [
         '@sentry/react-native/expo',
         {

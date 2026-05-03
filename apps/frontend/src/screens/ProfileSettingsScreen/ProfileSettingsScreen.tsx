@@ -1,5 +1,7 @@
 import { useRouter } from 'expo-router';
 
+import { DEFAULT_SUIT_DISPLAY_MODE } from '@shedding-game/shared';
+
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ProfileScreenShell } from '@/components/ProfileScreenShell/ProfileScreenShell';
 import { ProfileSectionCard } from '@/components/ProfileSectionCard';
@@ -18,6 +20,7 @@ import {
   SettingsActionButton,
   SettingsInfoField,
   SettingsToggleRow,
+  SettingsValueRow,
 } from './ProfileSettingsScreen.components';
 import { useProfileSettingsController } from './useProfileSettingsController';
 
@@ -56,6 +59,7 @@ export const ProfileSettingsScreen = () => {
   const emailMethodDescription = hasPasswordMethod
     ? t('common:profile.passwordHint')
     : t('common:profile.passwordSetupModalHint');
+  const suitDisplayMode = user?.suitDisplayMode ?? DEFAULT_SUIT_DISPLAY_MODE;
 
   return (
     <ProfileScreenShell>
@@ -124,6 +128,14 @@ export const ProfileSettingsScreen = () => {
             </Text>
           </Box>
         ) : null}
+
+        <SettingsValueRow
+          title={t('common:profile.suitDisplay.title')}
+          description={t('common:profile.suitDisplay.description')}
+          value={t(`common:profile.suitDisplay.modes.${suitDisplayMode}.label`)}
+          onPress={() => router.push(appRoutes.profileSettingsSuitDisplayMode)}
+          disabled={Boolean(pendingAction)}
+        />
 
         <SettingsToggleRow
           title={t('common:profile.discardPile.title')}

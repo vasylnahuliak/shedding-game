@@ -28,6 +28,35 @@ export const hasProfileSettingsAuthErrorCode = (error: unknown, expectedCode: st
 
 export const useProfileSettingsModalDismiss = () => useModalDismiss(appRoutes.profileSettings);
 
+export const createProfileSettingsSaveButtons = ({
+  canSave,
+  cancelTitle,
+  isSaving,
+  onCancel,
+  onSave,
+  saveTitle,
+}: {
+  canSave: boolean;
+  cancelTitle: string;
+  isSaving: boolean;
+  onCancel: () => void;
+  onSave: () => void;
+  saveTitle: string;
+}): ButtonProps[] => [
+  {
+    variant: 'secondary',
+    title: cancelTitle,
+    onPress: onCancel,
+    disabled: isSaving,
+  },
+  {
+    variant: 'success',
+    title: saveTitle,
+    onPress: onSave,
+    disabled: !canSave,
+  },
+];
+
 export const ProfileSettingsModalFrame = ({
   title,
   subtitle,

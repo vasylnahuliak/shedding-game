@@ -13,6 +13,7 @@ import { Box } from '@/components/ui/box';
 import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
+import { useAuth } from '@/hooks/useAuthStore';
 import { badgeToneClassNames, shadowClassNames } from '@/theme';
 import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
@@ -98,6 +99,7 @@ export const CenterAreaPiles = ({
   roomId,
   visibleAnimatingPlayCardKeys,
 }: CenterAreaPilesProps) => {
+  const suitDisplayMode = useAuth((state) => state.user?.suitDisplayMode);
   const { card, center } = layoutMetrics;
   const deckCardBaseStyle = {
     width: card.width,
@@ -184,7 +186,7 @@ export const CenterAreaPiles = ({
               <Text
                 className={mergeClassNames(
                   'text-[14px] font-bold text-text-on-card-face',
-                  getSuitTextClassName(activeSuit)
+                  getSuitTextClassName(activeSuit, suitDisplayMode)
                 )}
               >
                 {getSuitSymbol(activeSuit)}

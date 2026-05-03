@@ -7,6 +7,7 @@ import type {
   GamePace,
   GameStatus,
   Suit,
+  SuitDisplayMode,
   UserType,
 } from '@shedding-game/shared';
 import type { Request } from 'express';
@@ -21,6 +22,7 @@ export interface User {
   userType: UserType;
   hapticsEnabled: boolean;
   discardPileExpandedByDefault: boolean;
+  suitDisplayMode: SuitDisplayMode;
   roles: AppRole[];
   emojiPreferences?: EmojiPreferences;
 }

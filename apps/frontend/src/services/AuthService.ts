@@ -15,6 +15,7 @@ import {
   updateHapticsEnabled,
   updateLocale,
   updateProfile,
+  updateSuitDisplayMode,
 } from './authService.account';
 import { AuthServiceError } from './authService.errors';
 import {
@@ -52,5 +53,6 @@ export const AuthService = {
   updateEmojiPreference,
   updateHapticsEnabled,
   updateDiscardPileExpandedByDefault,
+  updateSuitDisplayMode,
   updateLocale,
 };

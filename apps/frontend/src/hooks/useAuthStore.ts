@@ -1,4 +1,4 @@
-import type { AppLocale, ReactionType } from '@shedding-game/shared';
+import type { AppLocale, ReactionType, SuitDisplayMode } from '@shedding-game/shared';
 import { create } from 'zustand';
 
 import { resolveAppLocale } from '@shedding-game/shared';
@@ -35,6 +35,7 @@ type AuthStore = {
   updateEmojiPreference: (reactionType: ReactionType, emoji: string) => Promise<void>;
   updateHapticsEnabled: (enabled: boolean) => Promise<void>;
   updateDiscardPileExpandedByDefault: (enabled: boolean) => Promise<void>;
+  updateSuitDisplayMode: (mode: SuitDisplayMode) => Promise<void>;
   setLocale: (locale: AppLocale) => Promise<void>;
   beginPasswordRecovery: () => void;
   setAuthState: (
@@ -220,6 +221,10 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     },
     updateDiscardPileExpandedByDefault: async (enabled: boolean) => {
       const updatedUser = await AuthService.updateDiscardPileExpandedByDefault(enabled);
+      set({ user: updatedUser });
+    },
+    updateSuitDisplayMode: async (mode: SuitDisplayMode) => {
+      const updatedUser = await AuthService.updateSuitDisplayMode(mode);
       set({ user: updatedUser });
     },
     setLocale: async (locale: AppLocale) => {

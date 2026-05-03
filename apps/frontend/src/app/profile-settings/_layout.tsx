@@ -11,6 +11,7 @@ export default function ProfileSettingsLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="edit-profile" options={fadeTransparentModalScreenOptions} />
       <Stack.Screen name="change-password" options={fadeTransparentModalScreenOptions} />
+      <Stack.Screen name="suit-display-mode" options={fadeTransparentModalScreenOptions} />
       <Stack.Screen name="debug" options={fadeTransparentModalScreenOptions} />
     </TransparentStackLayout>
   );

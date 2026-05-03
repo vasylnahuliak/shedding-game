@@ -6,6 +6,7 @@ import { FormInput } from '@/components/FormInput';
 import { useAuth } from '@/hooks/useAuthStore';
 import { useAppTranslation } from '@/i18n';
 import {
+  createProfileSettingsSaveButtons,
   getProfileSettingsAuthErrorMessage,
   hasProfileSettingsAuthErrorCode,
   ProfileSettingsInlineMessage,
@@ -65,20 +66,14 @@ export default function EditProfileRoute() {
       subtitle={t('common:profile.editHint')}
       dismissible={!isSavingProfile}
       onClose={dismiss}
-      buttons={[
-        {
-          variant: 'secondary',
-          title: t('common:buttons.cancel'),
-          onPress: dismiss,
-          disabled: isSavingProfile,
-        },
-        {
-          variant: 'success',
-          title: isSavingProfile ? t('common:profile.actions.saving') : t('common:buttons.save'),
-          onPress: () => void handleSave(),
-          disabled: !canSave,
-        },
-      ]}
+      buttons={createProfileSettingsSaveButtons({
+        canSave,
+        cancelTitle: t('common:buttons.cancel'),
+        isSaving: isSavingProfile,
+        onCancel: dismiss,
+        onSave: () => void handleSave(),
+        saveTitle: isSavingProfile ? t('common:profile.actions.saving') : t('common:buttons.save'),
+      })}
     >
       <FormInput
         label={t('auth:form.labels.displayName')}

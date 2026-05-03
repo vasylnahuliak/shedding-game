@@ -1,4 +1,4 @@
-import type { AppLocale, AppRole } from '@shedding-game/shared';
+import type { AppLocale, AppRole, SuitDisplayMode } from '@shedding-game/shared';
 
 import { prisma } from '@/db/client';
 import { bumpCacheNamespace } from '@/services/cache';
@@ -158,6 +158,16 @@ export const userRepository = {
   async updateDiscardPileExpandedByDefault(userId: string, enabled: boolean): Promise<User | null> {
     return updateUser(userId, {
       discardPileExpandedByDefault: enabled,
+      updatedAtMs: nowMsBigInt(),
+    });
+  },
+
+  async updateSuitDisplayMode(
+    userId: string,
+    suitDisplayMode: SuitDisplayMode
+  ): Promise<User | null> {
+    return updateUser(userId, {
+      suitDisplayMode,
       updatedAtMs: nowMsBigInt(),
     });
   },

@@ -1,4 +1,4 @@
-import type { AppLocale, ReactionType } from '@shedding-game/shared';
+import type { AppLocale, ReactionType, SuitDisplayMode } from '@shedding-game/shared';
 
 import {
   AuthUserResponseSchema,
@@ -7,6 +7,7 @@ import {
   UpdateEmojiPreferenceBodySchema,
   UpdateHapticsPreferenceBodySchema,
   UpdateLocaleBodySchema,
+  UpdateSuitDisplayModeBodySchema,
 } from '@shedding-game/shared';
 
 import i18n from '@/i18n';
@@ -222,6 +223,23 @@ export const updateDiscardPileExpandedByDefault = async (enabled: boolean): Prom
     return data.user;
   } catch (error) {
     throw await toAuthServiceError(error, i18n.t('common:profile.discardPile.saveFailed'));
+  }
+};
+
+export const updateSuitDisplayMode = async (mode: SuitDisplayMode): Promise<User> => {
+  try {
+    const body = parseWithSchema(UpdateSuitDisplayModeBodySchema, { mode });
+    const response = await api.put('auth/suit-display-mode', {
+      json: body,
+    });
+    const data = await parseApiResponse(
+      response,
+      AuthUserResponseSchema,
+      'PUT auth/suit-display-mode'
+    );
+    return data.user;
+  } catch (error) {
+    throw await toAuthServiceError(error, i18n.t('common:profile.suitDisplay.saveFailed'));
   }
 };
 

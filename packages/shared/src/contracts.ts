@@ -15,6 +15,7 @@ import {
   PassTurnPayloadSchema,
   ReactionTypeSchema,
   RoomIdPayloadSchema,
+  SuitDisplayModeSchema,
   UpdateLocaleBodySchema,
   UserTypeSchema,
 } from './schemas';
@@ -47,6 +48,7 @@ export const AuthUserSchema = v.object({
   locale: AppLocaleSchema,
   hapticsEnabled: v.boolean(),
   discardPileExpandedByDefault: v.boolean(),
+  suitDisplayMode: SuitDisplayModeSchema,
   roles: v.array(AppRoleSchema),
   emojiPreferences: v.optional(v.record(v.string(), v.string())),
 });

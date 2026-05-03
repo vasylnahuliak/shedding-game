@@ -1,6 +1,7 @@
 export type Suit = 'hearts' | 'diamonds' | 'clubs' | 'spades';
 export type Rank = '6' | '7' | '8' | '9' | '10' | 'J' | 'Q' | 'K' | 'A';
 export type UserType = 'human' | 'bot';
+export type SuitDisplayMode = 'classic' | 'distinct';
 
 export interface Card {
   suit: Suit;

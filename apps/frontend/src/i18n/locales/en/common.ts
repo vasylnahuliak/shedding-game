@@ -103,6 +103,23 @@ const common = {
         'Show the last 4 discard cards when a game opens. You can still tap the pile to switch during a match.',
       saveFailed: 'Failed to save discard pile preference',
     },
+    suitDisplay: {
+      title: 'Suit display mode',
+      description: 'Choose how suit colors appear on cards.',
+      modalSubtitle: 'Change the card suit color scheme. More variants can be added here later.',
+      selected: 'Selected',
+      saveFailed: 'Failed to save suit display mode',
+      modes: {
+        classic: {
+          label: 'Classic',
+          description: 'Hearts and diamonds are red, clubs and spades are dark.',
+        },
+        distinct: {
+          label: 'Distinct',
+          description: 'Hearts are red, diamonds orange, clubs dark green, and spades dark.',
+        },
+      },
+    },
     authMethods: {
       hint: 'Manage how you sign in to this account.',
       email: 'Email and password',

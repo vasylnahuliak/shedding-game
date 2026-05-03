@@ -56,6 +56,7 @@ export const appRoutes = {
   profileSettings: '/profile-settings' satisfies Href,
   profileSettingsEdit: '/profile-settings/edit-profile' satisfies Href,
   profileSettingsPassword: '/profile-settings/change-password' satisfies Href,
+  profileSettingsSuitDisplayMode: '/profile-settings/suit-display-mode' satisfies Href,
   profileSettingsDebug: '/profile-settings/debug' satisfies Href,
   admin: '/admin' satisfies Href,
   adminGames: '/admin/games' satisfies Href,

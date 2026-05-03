@@ -22,6 +22,7 @@ import {
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { APP_ENV } from '@/config';
+import { useAuth } from '@/hooks/useAuthStore';
 import { useAppTranslation } from '@/i18n';
 import { shadowClassNames } from '@/theme';
 import { appBuildInfo } from '@/utils/appBuildInfo';
@@ -41,6 +42,7 @@ const loadingSuitCardClassName = mergeClassNames(
 
 export const LoadingScreen = () => {
   const { t } = useAppTranslation(['common', 'game']);
+  const suitDisplayMode = useAuth((state) => state.user?.suitDisplayMode);
   const spin = useSharedValue(0);
   const pulse = useSharedValue(1);
   const fade = useSharedValue(0);
@@ -101,7 +103,7 @@ export const LoadingScreen = () => {
                 <Text
                   className={mergeClassNames(
                     'text-xl font-bold text-text-on-card-face',
-                    getSuitTextClassName(suit)
+                    getSuitTextClassName(suit, suitDisplayMode)
                   )}
                 >
                   {getSuitSymbol(suit)}

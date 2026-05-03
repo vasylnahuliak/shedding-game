@@ -12,6 +12,7 @@ export const sanitizeUser = (user: User): AuthUser => {
     locale: user.locale,
     hapticsEnabled: user.hapticsEnabled,
     discardPileExpandedByDefault: user.discardPileExpandedByDefault,
+    suitDisplayMode: user.suitDisplayMode,
     roles: user.roles,
     emojiPreferences: user.emojiPreferences,
   });

@@ -3,6 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
+import { useAuth } from '@/hooks/useAuthStore';
 import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
 import {
@@ -29,8 +30,9 @@ export function Card({
   interactive = true,
   metrics,
 }: CardProps) {
+  const suitDisplayMode = useAuth((state) => state.user?.suitDisplayMode);
   const suitSymbol = getSuitSymbol(card.suit);
-  const suitTextClassName = getSuitTextClassName(card.suit);
+  const suitTextClassName = getSuitTextClassName(card.suit, suitDisplayMode);
   const resolvedMetrics = size === 'small' ? SMALL_CARD_METRICS : (metrics ?? DEFAULT_CARD_METRICS);
   const metricPreset = getCardMetricPreset(resolvedMetrics);
   const metricClassNames = metricPreset ? CARD_METRIC_PRESET_CLASS_NAMES[metricPreset] : null;
