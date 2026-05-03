@@ -24,7 +24,7 @@ module.exports = () => {
   return {
     name: 'Shedding Game',
     slug: 'shedding-game',
-    version: '1.0.0',
+    version: '1.1.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
     scheme: 'sheddinggameapp',
