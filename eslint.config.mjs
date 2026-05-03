@@ -291,18 +291,6 @@ export default defineConfig([
   {
     files: [...frontendFiles, ...backendFiles, ...packageFiles],
     ignores: workspaceIgnores,
-    settings: {
-      'import/resolver': {
-        typescript: {
-          noWarnOnMultipleProjects: true,
-          project: [frontendTsconfig, backendTsconfig, sharedTsconfig],
-        },
-      },
-    },
-  },
-  {
-    files: [...frontendFiles, ...backendFiles, ...packageFiles],
-    ignores: workspaceIgnores,
     rules: {
       'max-lines': [
         'error',
@@ -521,6 +509,18 @@ export default defineConfig([
       path.join(rootDir, 'apps', 'backend', 'prisma.config.ts'),
     ],
     extends: [tseslint.configs.disableTypeChecked],
+  },
+  {
+    files: [...frontendFiles, ...backendFiles, ...packageFiles],
+    ignores: workspaceIgnores,
+    settings: {
+      'import/resolver': {
+        typescript: {
+          noWarnOnMultipleProjects: true,
+          project: [frontendTsconfig, backendTsconfig, sharedTsconfig],
+        },
+      },
+    },
   },
   eslintConfigPrettier,
 ]);
