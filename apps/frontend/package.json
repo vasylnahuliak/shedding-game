@@ -17,7 +17,8 @@
     "sentry:upload:eas-update-sourcemaps": "SENTRY_PROJECT=${SENTRY_PROJECT_MOBILE:-$SENTRY_PROJECT} sentry-expo-upload-sourcemaps dist",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix --max-warnings=0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "expo:router-types": "expo customize tsconfig.json"
   },
   "dependencies": {
     "@aptabase/react-native": "^0.4.0",

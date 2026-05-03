@@ -36,17 +36,15 @@ const GAME_FORCED_MODAL_ROUTE_NAMES = [
   'game-over',
 ] as const satisfies readonly ForcedGameModalRouteName[];
 
-const buildRoomHref = (pathname: Route, roomId: string): Href =>
-  ({
-    pathname,
-    params: { roomId },
-  }) as Href;
+const buildRoomHref = <P extends Route>(pathname: P, roomId: string) => ({
+  pathname,
+  params: { roomId },
+});
 
-const buildRoomBotHref = (pathname: Route, roomId: string, botId: string): Href =>
-  ({
-    pathname,
-    params: { roomId, botId },
-  }) as Href;
+const buildRoomBotHref = <P extends Route>(pathname: P, roomId: string, botId: string) => ({
+  pathname,
+  params: { roomId, botId },
+});
 
 export const appRoutes = {
   home: '/' satisfies Href,

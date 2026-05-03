@@ -21,8 +21,18 @@
     "shedding-game-backend#lint": {
       "dependsOn": ["^build", "prisma:generate"]
     },
+    "shedding-game-frontend#typecheck": {
+      "dependsOn": ["expo:router-types"]
+    },
+    "shedding-game-frontend#lint": {
+      "dependsOn": ["expo:router-types"]
+    },
     "prisma:generate": {
       "cache": false
+    },
+    "expo:router-types": {
+      "cache": false,
+      "outputs": [".expo/types/**"]
     },
     "dev": {
       "dependsOn": ["^build"],
