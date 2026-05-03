@@ -13,6 +13,8 @@ import type { ScoreTableProps } from './ScoreTable.types';
 
 const ROW_HEIGHT = 34;
 
+const cellTextStyle = { includeFontPadding: false, textAlignVertical: 'center' as const };
+
 const getEmoji = (event?: RoundScore['event']) => {
   if (!event) return '';
   switch (event.type) {
@@ -65,6 +67,7 @@ export const ScoreTable = ({
         <Text
           className="w-[44px] border-r border-r-border-default py-1.5 text-center text-sm font-semibold text-text-primary"
           numberOfLines={1}
+          style={cellTextStyle}
         >
           #
         </Text>
@@ -77,6 +80,7 @@ export const ScoreTable = ({
               key={p.id}
               className={`flex-1 border-r border-r-border-default py-1.5 text-center text-sm font-semibold ${ready ? 'text-text-primary' : 'text-text-placeholder'}`}
               numberOfLines={1}
+              style={cellTextStyle}
             >
               {p.isLeaver ? `${p.name} ${t('scoreTable.leaverSuffix')}` : p.name}
             </Text>
@@ -93,7 +97,9 @@ export const ScoreTable = ({
             key={roundIdx}
             className="h-[34px] w-full flex-row items-center border-b border-b-border-default"
           >
-            <Text className={roundCellBase}>{roundIdx + 1}</Text>
+            <Text className={roundCellBase} numberOfLines={1} style={cellTextStyle}>
+              {roundIdx + 1}
+            </Text>
             {players.map((p) => {
               const eliminatedAt = getEliminatedRoundIndex(p.id, history);
               const isAfterElimination = eliminatedAt >= 0 && roundIdx > eliminatedAt;
@@ -114,6 +120,8 @@ export const ScoreTable = ({
                     showValue && change <= 0 && 'font-semibold text-feedback-success',
                     isRoundFinisher && 'bg-overlay-success-soft'
                   )}
+                  numberOfLines={1}
+                  style={cellTextStyle}
                 >
                   {showValue ? `${change > 0 ? '+' : ''}${change}${emoji}` : ''}
                 </Text>
@@ -123,13 +131,17 @@ export const ScoreTable = ({
         ))}
       </ScrollView>
       <Box className="h-[34px] w-full flex-row items-center border-y border-y-border-default">
-        <Text className={roundCellBase}>∑</Text>
+        <Text className={roundCellBase} numberOfLines={1} style={cellTextStyle}>
+          ∑
+        </Text>
         {players.map((p) => {
           const isEliminated = p.score >= SCORE_ELIMINATION_THRESHOLD;
           return (
             <Text
               key={p.id}
               className={`flex-1 border-r border-r-border-default py-1.5 text-center text-lg font-bold text-text-primary ${isEliminated ? 'bg-overlay-danger-soft text-feedback-danger' : ''}`}
+              numberOfLines={1}
+              style={cellTextStyle}
             >
               {p.score}
               {isEliminated && ' 💀'}
