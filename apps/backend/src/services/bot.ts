@@ -210,8 +210,10 @@ export const scheduleBotTurn = (roomOrId: Room | string): void => {
   const scheduleFromRoom = (r: Room): void => {
     if (r.gameStatus !== 'playing') return;
 
+    let isBridgeDecision = false;
     if (r.bridgeAvailable && r.bridgePlayerId) {
       if (!shouldBotControl(r, r.bridgePlayerId)) return;
+      isBridgeDecision = true;
     } else {
       const currentPlayer = getBotControlledCurrentPlayer(r);
       if (!currentPlayer) return;
@@ -221,7 +223,7 @@ export const scheduleBotTurn = (roomOrId: Room | string): void => {
       'bot_turn',
       { roomId },
       {
-        delayMs: getBotDelayMs(),
+        delayMs: isBridgeDecision ? 0 : getBotDelayMs(),
         dedupeKey: `bot-turn:${roomId}`,
       }
     );
