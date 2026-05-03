@@ -14,7 +14,7 @@ import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { badgeToneClassNames, shadowClassNames } from '@/theme';
-import { getSuitSymbol, isRedSuit } from '@/utils/card';
+import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
 import { DeckShuffleAnimation } from '../DeckShuffleAnimation';
 
@@ -184,7 +184,7 @@ export const CenterAreaPiles = ({
               <Text
                 className={mergeClassNames(
                   'text-[14px] font-bold text-text-on-card-face',
-                  isRedSuit(activeSuit) && 'text-feedback-danger'
+                  getSuitTextClassName(activeSuit)
                 )}
               >
                 {getSuitSymbol(activeSuit)}

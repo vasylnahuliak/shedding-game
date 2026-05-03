@@ -25,7 +25,7 @@ import { APP_ENV } from '@/config';
 import { useAppTranslation } from '@/i18n';
 import { shadowClassNames } from '@/theme';
 import { appBuildInfo } from '@/utils/appBuildInfo';
-import { getSuitSymbol } from '@/utils/card';
+import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
 const isLocalEnv = APP_ENV === 'local';
 const envLabelByAppEnv = {
@@ -98,7 +98,12 @@ export const LoadingScreen = () => {
                   ][index] as ViewStyle,
                 ]}
               >
-                <Text className="text-xl font-bold text-text-on-card-face">
+                <Text
+                  className={mergeClassNames(
+                    'text-xl font-bold text-text-on-card-face',
+                    getSuitTextClassName(suit)
+                  )}
+                >
                   {getSuitSymbol(suit)}
                 </Text>
               </View>

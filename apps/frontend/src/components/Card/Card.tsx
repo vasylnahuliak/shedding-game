@@ -3,7 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
-import { getSuitSymbol, isRedSuit } from '@/utils/card';
+import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
 import {
   CARD_METRIC_PRESET_CLASS_NAMES,
@@ -29,8 +29,8 @@ export function Card({
   interactive = true,
   metrics,
 }: CardProps) {
-  const isRed = isRedSuit(card.suit);
   const suitSymbol = getSuitSymbol(card.suit);
+  const suitTextClassName = getSuitTextClassName(card.suit);
   const resolvedMetrics = size === 'small' ? SMALL_CARD_METRICS : (metrics ?? DEFAULT_CARD_METRICS);
   const metricPreset = getCardMetricPreset(resolvedMetrics);
   const metricClassNames = metricPreset ? CARD_METRIC_PRESET_CLASS_NAMES[metricPreset] : null;
@@ -50,7 +50,7 @@ export function Card({
   const cornerTextClassName = mergeClassNames(
     metricClassNames?.cornerText,
     'font-bold',
-    isRed ? 'text-feedback-danger' : 'text-text-on-card-face',
+    suitTextClassName,
     disabled && 'opacity-60'
   );
   const cardStyle = metricClassNames

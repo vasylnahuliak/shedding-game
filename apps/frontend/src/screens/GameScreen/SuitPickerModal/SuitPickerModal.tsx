@@ -5,7 +5,7 @@ import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { useAppTranslation } from '@/i18n';
 import { shadowClassNames } from '@/theme';
-import { getSuitSymbol, isRedSuit } from '@/utils/card';
+import { getSuitSymbol, getSuitTextClassName } from '@/utils/card';
 
 import { useGameScreenContext } from '../GameScreenContext';
 
@@ -19,8 +19,6 @@ export const SuitPickerModal = function SuitPickerModal() {
     <ModalShell title={t('suitPicker.title')} subtitle={t('suitPicker.subtitle')}>
       <Box className="w-full max-w-[312px] self-center flex-row items-center gap-2">
         {SUITS.map((suit) => {
-          const isRed = isRedSuit(suit);
-
           return (
             <Pressable
               key={suit}
@@ -33,7 +31,7 @@ export const SuitPickerModal = function SuitPickerModal() {
               <Text
                 className={mergeClassNames(
                   'text-[40px] font-extrabold text-text-on-card-face',
-                  isRed && 'text-feedback-danger'
+                  getSuitTextClassName(suit)
                 )}
               >
                 {getSuitSymbol(suit)}
