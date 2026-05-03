@@ -6,7 +6,7 @@ import type {
   PendingAuthRedirectIntent,
   SupabaseAuthStorageAccess,
 } from './authService.types';
-import { setAuthToken } from './index';
+import { setAuthToken } from './authToken';
 import { supabase } from './supabase';
 
 const PASSWORD_RECOVERY_STORAGE_KEY = 'auth.passwordRecoveryPending';

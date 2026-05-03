@@ -5,6 +5,8 @@ import { createClient, processLock } from '@supabase/supabase-js';
 
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from '@/config';
 
+import { setAuthToken } from './authToken';
+
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     storage: AsyncStorage,
@@ -13,6 +15,10 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     detectSessionInUrl: false,
     lock: processLock,
   },
+});
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  setAuthToken(session?.access_token ?? null);
 });
 
 if (AppState.currentState === 'active') {

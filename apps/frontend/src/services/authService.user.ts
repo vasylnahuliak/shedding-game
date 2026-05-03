@@ -17,8 +17,9 @@ import {
 } from './authService.errors';
 import { getPasswordRecoveryStorage } from './authService.storage';
 import type { AuthHydrationResult, SupabaseIdentity, User } from './authService.types';
+import { setAuthToken } from './authToken';
 import { parseApiResponse } from './contractValidation';
-import { api, setAuthToken } from './index';
+import { api } from './index';
 import { supabase } from './supabase';
 
 const buildAuthMethods = (params: {

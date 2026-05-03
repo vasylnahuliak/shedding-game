@@ -16,7 +16,7 @@ import {
 } from './authService.redirects';
 import { setPasswordRecoveryStorage, setPendingAuthRedirectIntent } from './authService.storage';
 import { fetchCurrentUserAfterSignIn } from './authService.user';
-import { setAuthToken } from './index';
+import { setAuthToken } from './authToken';
 import { supabase } from './supabase';
 
 export { consumeAuthRedirect, consumePasswordRecoveryLink };

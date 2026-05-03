@@ -16,7 +16,7 @@ import type {
   PendingAuthRedirectIntent,
   SupabaseAuthLikeResult,
 } from './authService.types';
-import { setAuthToken } from './index';
+import { setAuthToken } from './authToken';
 import { supabase } from './supabase';
 
 const parseParamString = (rawValue: string) => {

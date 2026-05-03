@@ -17,7 +17,7 @@ import {
 import { API_URL } from '@/config';
 import i18n from '@/i18n';
 
-import { getAuthToken } from './index';
+import { getAuthToken } from './authToken';
 import { LoggingService } from './LoggingService';
 
 const apiUrl = new URL(API_URL);

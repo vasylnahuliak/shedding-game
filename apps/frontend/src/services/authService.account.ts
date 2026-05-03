@@ -23,8 +23,9 @@ import {
 } from './authService.storage';
 import type { User } from './authService.types';
 import { fetchCurrentUserAfterSignIn, saveProfileWithErrorHandling } from './authService.user';
+import { setAuthToken } from './authToken';
 import { parseApiResponse } from './contractValidation';
-import { api, setAuthToken } from './index';
+import { api } from './index';
 import { supabase } from './supabase';
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
