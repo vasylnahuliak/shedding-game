@@ -116,6 +116,11 @@ const admin = {
     createdAt: 'Створено: {{value}}',
     updatedAt: 'Оновлено: {{value}}',
     gameHistory: 'Історія ігор',
+    addAdminAccess: 'Додати доступ адміна',
+    removeAdminAccess: 'Прибрати доступ адміна',
+    adminAccessUpdateFailed: 'Не вдалося оновити доступ адміна',
+    removeAdminAccessConfirmTitle: 'Прибрати доступ адміна?',
+    removeAdminAccessConfirmDescription: '{{name}} більше не зможе відкривати адмін-зону.',
     roles: {
       player: 'Гравець',
       admin: 'Адмін',

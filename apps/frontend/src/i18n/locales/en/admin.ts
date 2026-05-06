@@ -116,6 +116,11 @@ const admin = {
     createdAt: 'Created: {{value}}',
     updatedAt: 'Updated: {{value}}',
     gameHistory: 'Game history',
+    addAdminAccess: 'Add admin access',
+    removeAdminAccess: 'Remove admin access',
+    adminAccessUpdateFailed: 'Failed to update admin access',
+    removeAdminAccessConfirmTitle: 'Remove admin access?',
+    removeAdminAccessConfirmDescription: '{{name}} will no longer be able to open the admin area.',
     roles: {
       player: 'Player',
       admin: 'Admin',

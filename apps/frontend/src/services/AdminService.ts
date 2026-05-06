@@ -1,6 +1,8 @@
 import type {
   AdminAccountDeletionRequest,
   AdminUserSummaryPage,
+  AppRole,
+  AuthUser,
   GameHistoryFilters,
   GameHistoryPage,
   UserStats,
@@ -8,6 +10,7 @@ import type {
 
 import {
   AdminAccountDeletionRequestListResponseSchema,
+  AdminUserResponseSchema,
   AdminUserSummaryPageSchema,
   GameHistoryPageSchema,
   UserStatsSchema,
@@ -80,9 +83,35 @@ const getUserStats = async (userId: string, filters?: GameHistoryFilters): Promi
   return parseApiResponse(response, UserStatsSchema, 'GET admin/users/:userId/stats');
 };
 
+const assignUserRole = async (userId: string, role: AppRole): Promise<AuthUser> => {
+  const response = await api.post(`admin/users/${userId}/roles`, {
+    json: { role },
+  });
+  const data = await parseApiResponse(
+    response,
+    AdminUserResponseSchema,
+    'POST admin/users/:userId/roles'
+  );
+
+  return data.user;
+};
+
+const removeUserRole = async (userId: string, role: AppRole): Promise<AuthUser> => {
+  const response = await api.delete(`admin/users/${userId}/roles/${role}`);
+  const data = await parseApiResponse(
+    response,
+    AdminUserResponseSchema,
+    'DELETE admin/users/:userId/roles/:role'
+  );
+
+  return data.user;
+};
+
 export const AdminService = {
+  assignUserRole,
   getAccountDeletionRequests,
   getUsers,
   getUserGames,
   getUserStats,
+  removeUserRole,
 };

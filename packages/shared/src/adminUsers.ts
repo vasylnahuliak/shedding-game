@@ -21,8 +21,5 @@ export const AdminUserSummaryPageSchema = v.object({
   nextCursor: v.optional(v.string()),
 });
 
-export const AdminUserListResponseSchema = AdminUserSummaryPageSchema;
-
 export type AdminUser = v.InferOutput<typeof AdminUserSummarySchema>;
-export type AdminUserListResponse = v.InferOutput<typeof AdminUserListResponseSchema>;
 export type AdminUserSummaryPage = v.InferOutput<typeof AdminUserSummaryPageSchema>;

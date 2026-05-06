@@ -1,5 +1,6 @@
 import type {
   AdminUserSummaryPage,
+  AppRole,
   GameHistoryFilters,
   GameHistoryPage,
 } from '@shedding-game/shared';
@@ -8,7 +9,9 @@ import {
   keepPreviousData,
   queryOptions,
   useInfiniteQuery,
+  useMutation,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
 
 import { AdminService } from '@/services/AdminService';
@@ -90,4 +93,33 @@ export const useAdminUserGamesQuery = (userId: string, filters: GameHistoryFilte
 
 export const useAdminUserStatsQuery = (userId: string, filters: GameHistoryFilters) => {
   return useQuery(adminQueries.userStats(userId, filters));
+};
+
+type UpdateAdminUserRoleVariables = {
+  role: AppRole;
+  userId: string;
+};
+
+export const useAssignAdminUserRoleMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ role, userId }: UpdateAdminUserRoleVariables) =>
+      AdminService.assignUserRole(userId, role),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: adminKeys.users() });
+    },
+  });
+};
+
+export const useRemoveAdminUserRoleMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ role, userId }: UpdateAdminUserRoleVariables) =>
+      AdminService.removeUserRole(userId, role),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: adminKeys.users() });
+    },
+  });
 };
