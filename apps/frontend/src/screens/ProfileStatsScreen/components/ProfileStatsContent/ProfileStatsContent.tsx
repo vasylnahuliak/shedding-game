@@ -1,20 +1,16 @@
-import { ActivityIndicator } from 'react-native';
-
 import { useMyStatsQuery } from '@/api';
 import { Button } from '@/components/Button';
-import { GameStatsCard } from '@/components/GameStatsCard';
-import { ListEmptyState } from '@/components/ListEmptyState';
-import { ListPaginationFooter } from '@/components/ListPaginationFooter';
+import { GameHistoryStatsList } from '@/components/GameHistoryStatsList';
 import { ProfileSectionCard } from '@/components/ProfileSectionCard';
 import { Box } from '@/components/ui/box';
-import { StyledLegendList } from '@/components/ui/interop';
 import { Text } from '@/components/ui/text';
 import { useAuth } from '@/hooks/useAuthStore';
 import { useGameStatistics } from '@/hooks/useGameStatistics';
 import { useAppTranslation } from '@/i18n';
-import { getGameHistoryItemKey, getGameHistoryListKey } from '@/utils/gameHistory';
+import { getGameHistoryListKey } from '@/utils/gameHistory';
 
 import { useProfileStatsFiltersStore } from '../../hooks/useProfileStatsFilters';
+import { ProfileStatsLoadGate } from '../ProfileStatsLoadGate';
 import { ProfileStatsState } from '../ProfileStatsState';
 import { ProfileStatsSummary } from '../ProfileStatsSummary';
 
@@ -55,96 +51,52 @@ export const ProfileStatsContent = function ProfileStatsContent() {
     !userId || ((isLoading || isStatsLoading) && games.length === 0 && !stats);
   const hasBlockingError = (isError || isStatsError) && games.length === 0 && !stats;
 
-  if (isInitialLoading) {
-    return (
-      <Box className="flex-1">
-        <ProfileSectionCard>
-          <ProfileStatsState
-            leading={<ActivityIndicator size="large" colorClassName="accent-text-accent" />}
-            description={t('common:labels.loading')}
-          />
-        </ProfileSectionCard>
-      </Box>
-    );
-  }
-
-  if (hasBlockingError) {
-    return (
-      <Box className="flex-1">
-        <ProfileSectionCard>
-          <ProfileStatsState
-            title={t('alerts:errorBoundary.title')}
-            description={t('alerts:errorBoundary.fallback')}
-          >
-            <Button
-              title={
-                isFetching || isStatsFetching
-                  ? t('common:labels.loading')
-                  : t('common:buttons.retry')
-              }
-              onPress={retryAll}
-              disabled={isFetching || isStatsFetching}
-            />
-          </ProfileStatsState>
-        </ProfileSectionCard>
-      </Box>
-    );
-  }
-
   return (
-    <StyledLegendList
-      key={listKey}
-      className="flex-1"
-      data={games}
-      keyExtractor={getGameHistoryItemKey}
-      refreshing={refreshing || (isStatsFetching && !isStatsLoading)}
-      onRefresh={refreshAll}
-      onEndReached={() => {
-        if (!hasNextPage || isFetchingNextPage) {
-          return;
+    <ProfileStatsLoadGate
+      frame="box"
+      isInitialLoading={isInitialLoading}
+      hasBlockingError={hasBlockingError}
+      loadingDescription={t('common:labels.loading')}
+      onRetry={retryAll}
+      retrying={isFetching || isStatsFetching}
+    >
+      <GameHistoryStatsList
+        listKey={listKey}
+        games={games}
+        fetchNextPage={() => void fetchNextPage()}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        refreshing={refreshing || (isStatsFetching && !isStatsLoading)}
+        onRefresh={refreshAll}
+        emptyTitle={t('rooms:statistics.emptyTitle')}
+        emptyDescription={t('rooms:statistics.emptyDescription')}
+        headerComponent={
+          <Box className="gap-5 pb-5">
+            <ProfileSectionCard>
+              {stats && !isStatsError ? (
+                <ProfileStatsSummary stats={stats} />
+              ) : (
+                <ProfileStatsState
+                  title={t('alerts:errorBoundary.title')}
+                  description={t('alerts:errorBoundary.fallback')}
+                >
+                  <Button
+                    title={isStatsFetching ? t('common:labels.loading') : t('common:buttons.retry')}
+                    onPress={retryAll}
+                    disabled={isStatsFetching}
+                  />
+                </ProfileStatsState>
+              )}
+            </ProfileSectionCard>
+
+            {games.length > 0 ? (
+              <Text className="px-1 text-[20px] font-extrabold text-text-primary">
+                {t('rooms:statistics.gamesTitle', { count: totalCount })}
+              </Text>
+            ) : null}
+          </Box>
         }
-
-        void fetchNextPage();
-      }}
-      onEndReachedThreshold={0.35}
-      showsVerticalScrollIndicator={false}
-      ListHeaderComponent={
-        <Box className="gap-5 pb-5">
-          <ProfileSectionCard>
-            {stats && !isStatsError ? (
-              <ProfileStatsSummary stats={stats} />
-            ) : (
-              <ProfileStatsState
-                title={t('alerts:errorBoundary.title')}
-                description={t('alerts:errorBoundary.fallback')}
-              >
-                <Button
-                  title={isStatsFetching ? t('common:labels.loading') : t('common:buttons.retry')}
-                  onPress={retryAll}
-                  disabled={isStatsFetching}
-                />
-              </ProfileStatsState>
-            )}
-          </ProfileSectionCard>
-
-          {games.length > 0 ? (
-            <Text className="px-1 text-[20px] font-extrabold text-text-primary">
-              {t('rooms:statistics.gamesTitle', { count: totalCount })}
-            </Text>
-          ) : null}
-        </Box>
-      }
-      renderItem={({ item }) => <GameStatsCard game={item} />}
-      ListFooterComponent={<ListPaginationFooter isLoadingMore={isFetchingNextPage} />}
-      ListEmptyComponent={
-        <ProfileSectionCard>
-          <ListEmptyState
-            title={t('rooms:statistics.emptyTitle')}
-            description={t('rooms:statistics.emptyDescription')}
-            icon="🎮"
-          />
-        </ProfileSectionCard>
-      }
-    />
+      />
+    </ProfileStatsLoadGate>
   );
 };

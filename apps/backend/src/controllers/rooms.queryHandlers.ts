@@ -15,22 +15,9 @@ import {
 } from '@/services/room';
 import { createRoomInviteLink } from '@/services/smler';
 import type { AuthedRequest } from '@/types';
-import {
-  resolveGameHistoryCursor,
-  resolveGameHistoryFilters,
-  resolveGameHistoryLimit,
-} from '@/utils/gameHistory';
+import { resolveGameHistoryPageOptions } from '@/utils/gameHistory';
 
 import { getAccessibleRoomOrRespond } from './rooms.shared';
-
-const getGameHistoryPageOptions = (req: Request) => ({
-  limit: resolveGameHistoryLimit(req.query.limit),
-  cursor: resolveGameHistoryCursor(req.query.cursor),
-  filters: resolveGameHistoryFilters({
-    playerTypeFilter: req.query.playerTypeFilter,
-    gameStatusFilter: req.query.gameStatusFilter,
-  }),
-});
 
 export const getRooms = async (req: Request, res: Response) => {
   const userId = (req as AuthedRequest).userId;
@@ -38,12 +25,12 @@ export const getRooms = async (req: Request, res: Response) => {
 };
 
 export const getAllGames = async (req: Request, res: Response) => {
-  res.json(await getGamesPage(undefined, getGameHistoryPageOptions(req)));
+  res.json(await getGamesPage(undefined, resolveGameHistoryPageOptions(req.query)));
 };
 
 export const getMyGames = async (req: Request, res: Response) => {
   const userId = (req as AuthedRequest).userId;
-  res.json(await getGamesPage(userId, getGameHistoryPageOptions(req)));
+  res.json(await getGamesPage(userId, resolveGameHistoryPageOptions(req.query)));
 };
 
 export const getJobs = async (req: Request, res: Response) => {

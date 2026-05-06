@@ -20,6 +20,8 @@ import {
   userSelect,
   withExistingUser,
 } from './userRepository.helpers';
+import type { UserListPageOptions } from './userRepository.pagination';
+import { buildUserSearchWhere, searchUserPageByNameOrEmail } from './userRepository.pagination';
 
 export { DELETED_ACCOUNT_NAME } from './userRepository.helpers';
 
@@ -205,32 +207,23 @@ export const userRepository = {
   },
 
   async searchByNameOrEmail(query?: string): Promise<User[]> {
-    const normalizedQuery = query?.trim();
     const users = await prisma.user.findMany({
-      where: normalizedQuery
-        ? {
-            OR: [
-              {
-                name: {
-                  contains: normalizedQuery,
-                  mode: 'insensitive',
-                },
-              },
-              {
-                email: {
-                  contains: normalizedQuery.toLowerCase(),
-                  mode: 'insensitive',
-                },
-              },
-            ],
-          }
-        : undefined,
+      where: buildUserSearchWhere(query),
       orderBy: [{ updatedAtMs: 'desc' }, { name: 'asc' }],
       take: 50,
       select: userListSelect,
     });
 
     return users.map(mapUserFromDb);
+  },
+
+  async searchPageByNameOrEmail(options: UserListPageOptions): Promise<{
+    hasMore: boolean;
+    nextCursor?: string;
+    totalCount: number;
+    users: User[];
+  }> {
+    return searchUserPageByNameOrEmail(options);
   },
 
   async assignRole(userId: string, role: AppRole): Promise<User | null> {

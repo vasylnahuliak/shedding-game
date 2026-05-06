@@ -4,6 +4,10 @@ type RoomRouteParams = {
   roomId: string;
 };
 
+type AdminUserRouteParams = {
+  userId: string;
+};
+
 type RoomBotRouteParams = RoomRouteParams & {
   botId: string;
 };
@@ -58,6 +62,9 @@ export const appRoutes = {
   profileSettingsDebug: '/profile-settings/debug' satisfies Href,
   admin: '/admin' satisfies Href,
   adminGames: '/admin/games' satisfies Href,
+  adminUsers: '/admin/users' satisfies Href,
+  adminUserGames: ({ userId }: AdminUserRouteParams) =>
+    ({ pathname: '/admin/users/[userId]/games', params: { userId } }) satisfies Href,
   adminAccountDeletionRequests: '/admin/account-deletion-requests' satisfies Href,
   adminFilters: '/admin/filters' satisfies Href,
   emojiPicker: '/emoji-picker' satisfies Href,

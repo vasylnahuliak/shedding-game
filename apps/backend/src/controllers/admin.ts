@@ -2,20 +2,37 @@ import type { AppRole } from '@shedding-game/shared';
 import type { Request, Response } from 'express';
 
 import {
+  AdminUserSummaryPageSchema,
   AppRoleSchema,
   AssignUserRoleRequestSchema,
+  parseWithSchema,
   safeParseWithSchema,
+  UserStatsSchema,
 } from '@shedding-game/shared';
 
 import { accountDeletionRequestRepository } from '@/db/repositories/accountDeletionRequestRepository';
 import { userRepository } from '@/db/repositories/userRepository';
 import { sanitizeUser } from '@/services/auth';
 import { apiError } from '@/services/messages';
+import { getGamesPage, getUserStatsSummary } from '@/services/room';
 import type { AuthedRequest } from '@/types';
+import {
+  resolveBoundedPageLimit,
+  resolveGameHistoryCursor,
+  resolveGameHistoryFilters,
+  resolveGameHistoryPageOptions,
+} from '@/utils/gameHistory';
 
 type ManagedRole = Exclude<AppRole, 'player'>;
 
+const DEFAULT_USER_LIST_PAGE_LIMIT = 20;
+const MAX_USER_LIST_PAGE_LIMIT = 50;
+
 const isManagedRole = (role: AppRole): role is ManagedRole => role !== 'player';
+
+const resolveUserListLimit = (rawLimit: unknown): number => {
+  return resolveBoundedPageLimit(rawLimit, DEFAULT_USER_LIST_PAGE_LIMIT, MAX_USER_LIST_PAGE_LIMIT);
+};
 
 const parseManagedRole = (
   req: Request,
@@ -58,8 +75,42 @@ export const listUsers = async (req: Request, res: Response) => {
   const queryParam = req.query.query;
   const query = typeof queryParam === 'string' ? queryParam : undefined;
 
-  const users = await userRepository.searchByNameOrEmail(query);
-  res.json({ users: users.map((user) => sanitizeUser(user)) });
+  const page = await userRepository.searchPageByNameOrEmail({
+    query,
+    limit: resolveUserListLimit(req.query.limit),
+    cursor: resolveGameHistoryCursor(req.query.cursor),
+  });
+
+  res.json(
+    parseWithSchema(AdminUserSummaryPageSchema, {
+      ...page,
+      users: page.users.map((user) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        locale: user.locale,
+        roles: user.roles,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      })),
+    })
+  );
+};
+
+export const getUserGames = async (req: Request, res: Response) => {
+  res.json(await getGamesPage(String(req.params.userId), resolveGameHistoryPageOptions(req.query)));
+};
+
+export const getUserStats = async (req: Request, res: Response) => {
+  const stats = await getUserStatsSummary(
+    String(req.params.userId),
+    resolveGameHistoryFilters({
+      playerTypeFilter: req.query.playerTypeFilter,
+      gameStatusFilter: req.query.gameStatusFilter,
+    })
+  );
+
+  res.json(parseWithSchema(UserStatsSchema, stats));
 };
 
 export const listAccountDeletionRequests = async (_req: Request, res: Response) => {

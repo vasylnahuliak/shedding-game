@@ -12,6 +12,12 @@ const admin = {
         ctaTitle: 'Open game list',
         ctaDescription: 'See active, waiting, and closed games in one place.',
       },
+      users: {
+        title: 'Users',
+        hint: 'Search app users and inspect their game history.',
+        ctaTitle: 'Open users',
+        ctaDescription: 'Find a user, review account details, and open their games.',
+      },
       accountDeletionRequests: {
         title: 'Account deletion requests',
         hint: 'Review requests submitted from the public account deletion form.',
@@ -26,6 +32,25 @@ const admin = {
     allGames: 'All games ({{count}})',
     emptyTitle: 'No games',
     emptyDescription: 'There are no rooms or games on the server yet.',
+  },
+  usersScreen: {
+    title: 'Users',
+    loading: 'Loading users...',
+    allUsers: 'Users ({{count}})',
+    searchLabel: 'Search',
+    searchPlaceholder: 'Name or email',
+    emptyTitle: 'No users',
+    emptyDescription: 'There are no users in the app yet.',
+    emptySearchTitle: 'No matches',
+    emptySearchDescription: 'No users match this search.',
+  },
+  userGamesScreen: {
+    title: 'User History',
+    loading: 'Loading user history...',
+    statsTitle: 'Stats',
+    gamesTitle: 'Games ({{count}})',
+    emptyTitle: 'No games',
+    emptyDescription: 'This user has not played any games yet.',
   },
   requestsScreen: {
     title: 'Deletion Requests',
@@ -82,6 +107,19 @@ const admin = {
     notesLabel: 'Notes',
     sources: {
       publicWebForm: 'Web form',
+    },
+  },
+  usersCard: {
+    email: 'Email: {{value}}',
+    userId: 'User ID: {{value}}',
+    locale: 'Locale: {{value}}',
+    createdAt: 'Created: {{value}}',
+    updatedAt: 'Updated: {{value}}',
+    gameHistory: 'Game history',
+    roles: {
+      player: 'Player',
+      admin: 'Admin',
+      super_admin: 'Super admin',
     },
   },
   debug: adminDebug,

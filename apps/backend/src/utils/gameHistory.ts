@@ -11,6 +11,13 @@ type GameHistoryWhereClause = Record<string, unknown>;
 const DEFAULT_GAME_HISTORY_PAGE_LIMIT = 20;
 const MAX_GAME_HISTORY_PAGE_LIMIT = 50;
 
+type GameHistoryQueryInput = {
+  cursor?: unknown;
+  gameStatusFilter?: unknown;
+  limit?: unknown;
+  playerTypeFilter?: unknown;
+};
+
 export const combineGameHistoryWhere = <T extends GameHistoryWhereClause>(
   ...clauses: Array<T | undefined>
 ): T | undefined => {
@@ -154,13 +161,20 @@ export const resolveGameHistoryFilters = (input: {
     : { ...DEFAULT_GAME_HISTORY_FILTERS };
 };
 
-export const resolveGameHistoryLimit = (rawLimit: unknown): number => {
+export const resolveBoundedPageLimit = (
+  rawLimit: unknown,
+  defaultLimit: number,
+  maxLimit: number
+): number => {
   const parsedLimit = Number(rawLimit);
 
   return Number.isFinite(parsedLimit)
-    ? Math.max(1, Math.min(MAX_GAME_HISTORY_PAGE_LIMIT, Math.floor(parsedLimit)))
-    : DEFAULT_GAME_HISTORY_PAGE_LIMIT;
+    ? Math.max(1, Math.min(maxLimit, Math.floor(parsedLimit)))
+    : defaultLimit;
 };
+
+const resolveGameHistoryLimit = (rawLimit: unknown): number =>
+  resolveBoundedPageLimit(rawLimit, DEFAULT_GAME_HISTORY_PAGE_LIMIT, MAX_GAME_HISTORY_PAGE_LIMIT);
 
 export const resolveGameHistoryCursor = (rawCursor: unknown): string | undefined => {
   if (typeof rawCursor !== 'string') {
@@ -170,3 +184,12 @@ export const resolveGameHistoryCursor = (rawCursor: unknown): string | undefined
   const cursor = rawCursor.trim();
   return cursor.length > 0 ? cursor : undefined;
 };
+
+export const resolveGameHistoryPageOptions = (query: GameHistoryQueryInput) => ({
+  limit: resolveGameHistoryLimit(query.limit),
+  cursor: resolveGameHistoryCursor(query.cursor),
+  filters: resolveGameHistoryFilters({
+    playerTypeFilter: query.playerTypeFilter,
+    gameStatusFilter: query.gameStatusFilter,
+  }),
+});

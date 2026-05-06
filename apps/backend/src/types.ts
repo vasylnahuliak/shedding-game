@@ -25,6 +25,8 @@ export interface User {
   suitDisplayMode: SuitDisplayMode;
   roles: AppRole[];
   emojiPreferences?: EmojiPreferences;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface Player {

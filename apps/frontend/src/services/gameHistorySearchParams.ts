@@ -5,10 +5,28 @@ import {
   parseWithSchema,
 } from '@shedding-game/shared';
 
-type GameHistorySearchParamsOptions = {
+type CursorPaginationSearchParamsOptions = {
   cursor?: string;
-  filters?: GameHistoryFilters;
   limit?: number;
+};
+
+type GameHistorySearchParamsOptions = CursorPaginationSearchParamsOptions & {
+  filters?: GameHistoryFilters;
+};
+
+export const addCursorPaginationSearchParams = (
+  searchParams: Record<string, string>,
+  options: CursorPaginationSearchParamsOptions
+) => {
+  if (typeof options.limit === 'number') {
+    searchParams.limit = String(options.limit);
+  }
+
+  if (options.cursor) {
+    searchParams.cursor = options.cursor;
+  }
+
+  return searchParams;
 };
 
 export const buildGameHistorySearchParams = (options: GameHistorySearchParamsOptions = {}) => {
@@ -21,13 +39,5 @@ export const buildGameHistorySearchParams = (options: GameHistorySearchParamsOpt
     gameStatusFilter: filters.gameStatusFilter,
   };
 
-  if (typeof options.limit === 'number') {
-    searchParams.limit = String(options.limit);
-  }
-
-  if (options.cursor) {
-    searchParams.cursor = options.cursor;
-  }
-
-  return searchParams;
+  return addCursorPaginationSearchParams(searchParams, options);
 };

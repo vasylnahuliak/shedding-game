@@ -34,4 +34,10 @@ export const statsKeys = {
 export const adminKeys = {
   all: ['admin'] as const,
   accountDeletionRequests: () => [...adminKeys.all, 'accountDeletionRequests'] as const,
+  users: () => [...adminKeys.all, 'users'] as const,
+  userList: (query: string) => [...adminKeys.users(), 'list', query] as const,
+  userGames: (userId: string, filters: GameHistoryFilters) =>
+    [...adminKeys.users(), userId, 'games', ...getGameHistoryFilterKey(filters)] as const,
+  userStats: (userId: string, filters: GameHistoryFilters) =>
+    [...adminKeys.users(), userId, 'stats', ...getGameHistoryFilterKey(filters)] as const,
 };

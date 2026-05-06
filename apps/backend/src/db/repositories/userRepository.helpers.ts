@@ -36,6 +36,8 @@ export const mapUserFromDb = (record: {
   hapticsEnabled: boolean;
   discardPileExpandedByDefault: boolean;
   suitDisplayMode: string;
+  createdAtMs: bigint;
+  updatedAtMs: bigint;
   emojiPreferences: Prisma.JsonValue | null;
   roles: Array<{
     role: {
@@ -55,6 +57,8 @@ export const mapUserFromDb = (record: {
     : DEFAULT_SUIT_DISPLAY_MODE,
   roles: record.roles.map(({ role }) => role.name),
   emojiPreferences: toEmojiPreferences(record.emojiPreferences),
+  createdAt: Number(record.createdAtMs),
+  updatedAt: Number(record.updatedAtMs),
 });
 
 export const nowMsBigInt = () => BigInt(Date.now());
@@ -69,6 +73,8 @@ export const userSelect = {
   hapticsEnabled: true,
   discardPileExpandedByDefault: true,
   suitDisplayMode: true,
+  createdAtMs: true,
+  updatedAtMs: true,
   emojiPreferences: true,
   roles: {
     select: {

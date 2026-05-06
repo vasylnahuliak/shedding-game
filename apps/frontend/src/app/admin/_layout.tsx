@@ -1,6 +1,9 @@
-import { Redirect } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 
-import { FiltersStackLayout } from '@/components/FiltersStackLayout';
+import {
+  fadeTransparentModalScreenOptions,
+  TransparentStackLayout,
+} from '@/components/TransparentStackLayout/TransparentStackLayout';
 import { useCanAccessAdmin } from '@/hooks';
 
 export default function AdminLayout() {
@@ -10,5 +13,14 @@ export default function AdminLayout() {
     return <Redirect href="/" />;
   }
 
-  return <FiltersStackLayout />;
+  return (
+    <TransparentStackLayout>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="games" />
+      <Stack.Screen name="users/index" />
+      <Stack.Screen name="users/[userId]/games" />
+      <Stack.Screen name="account-deletion-requests" />
+      <Stack.Screen name="filters" options={fadeTransparentModalScreenOptions} />
+    </TransparentStackLayout>
+  );
 }

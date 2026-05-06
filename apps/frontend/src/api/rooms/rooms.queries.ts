@@ -9,6 +9,7 @@ import {
 
 import { RoomsService } from '@/services/RoomsService';
 
+import { selectGameHistoryInfiniteData } from '../gameHistory.selectors';
 import { roomKeys } from '../query-keys';
 
 export type GamesScope = 'all' | 'me';
@@ -90,11 +91,6 @@ export const useActiveGameQuery = () => {
 export const useGamesQuery = (scope: GamesScope, filters: GameHistoryFilters) => {
   return useInfiniteQuery({
     ...roomsQueries.games(scope, filters),
-    select: (data) => ({
-      pages: data.pages,
-      pageParams: data.pageParams,
-      items: data.pages.flatMap((page) => page.items),
-      totalCount: data.pages[0]?.totalCount ?? 0,
-    }),
+    select: selectGameHistoryInfiniteData,
   });
 };

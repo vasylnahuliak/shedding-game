@@ -57,10 +57,6 @@ export const AuthUserResponseSchema = v.object({
   user: AuthUserSchema,
 });
 
-export const AdminUserListSchema = v.array(AuthUserSchema);
-export const AdminUserListResponseSchema = v.object({
-  users: AdminUserListSchema,
-});
 export const AssignUserRoleRequestSchema = AssignUserRoleBodySchema;
 export const AdminUserResponseSchema = v.object({
   user: AuthUserSchema,
@@ -271,8 +267,6 @@ export type RoundScoreEvent = v.InferOutput<typeof RoundScoreEventSchema>;
 export type RoundScore = v.InferOutput<typeof RoundScoreSchema>;
 export type AuthUser = v.InferOutput<typeof AuthUserSchema>;
 export type AuthUserResponse = v.InferOutput<typeof AuthUserResponseSchema>;
-export type AdminUser = AuthUser;
-export type AdminUserListResponse = v.InferOutput<typeof AdminUserListResponseSchema>;
 export type AdminUserResponse = v.InferOutput<typeof AdminUserResponseSchema>;
 export type AdminAccountDeletionRequest = v.InferOutput<typeof AdminAccountDeletionRequestSchema>;
 export type AdminAccountDeletionRequestListResponse = v.InferOutput<

@@ -12,6 +12,12 @@ const admin = {
         ctaTitle: 'Відкрити список ігор',
         ctaDescription: 'Подивитися активні, незапущені та закриті ігри в одному місці.',
       },
+      users: {
+        title: 'Користувачі',
+        hint: 'Пошук користувачів застосунку та перегляд їхньої історії ігор.',
+        ctaTitle: 'Відкрити користувачів',
+        ctaDescription: 'Знайти користувача, переглянути дані акаунта та його ігри.',
+      },
       accountDeletionRequests: {
         title: 'Запити на видалення акаунта',
         hint: 'Перегляд запитів, надісланих із публічної форми видалення акаунта.',
@@ -26,6 +32,25 @@ const admin = {
     allGames: 'Усі ігри ({{count}})',
     emptyTitle: 'Немає ігор',
     emptyDescription: 'На сервері ще немає жодної кімнати або гри.',
+  },
+  usersScreen: {
+    title: 'Користувачі',
+    loading: 'Завантаження користувачів...',
+    allUsers: 'Користувачі ({{count}})',
+    searchLabel: 'Пошук',
+    searchPlaceholder: 'Імʼя або email',
+    emptyTitle: 'Немає користувачів',
+    emptyDescription: 'У застосунку ще немає користувачів.',
+    emptySearchTitle: 'Нічого не знайдено',
+    emptySearchDescription: 'Жоден користувач не відповідає цьому пошуку.',
+  },
+  userGamesScreen: {
+    title: 'Історія користувача',
+    loading: 'Завантаження історії користувача...',
+    statsTitle: 'Статистика',
+    gamesTitle: 'Ігри ({{count}})',
+    emptyTitle: 'Немає ігор',
+    emptyDescription: 'Цей користувач ще не грав жодної гри.',
   },
   requestsScreen: {
     title: 'Запити на видалення',
@@ -82,6 +107,19 @@ const admin = {
     notesLabel: 'Нотатки',
     sources: {
       publicWebForm: 'Веб-форма',
+    },
+  },
+  usersCard: {
+    email: 'Email: {{value}}',
+    userId: 'ID користувача: {{value}}',
+    locale: 'Мова: {{value}}',
+    createdAt: 'Створено: {{value}}',
+    updatedAt: 'Оновлено: {{value}}',
+    gameHistory: 'Історія ігор',
+    roles: {
+      player: 'Гравець',
+      admin: 'Адмін',
+      super_admin: 'Суперадмін',
     },
   },
   debug: adminDebug,
