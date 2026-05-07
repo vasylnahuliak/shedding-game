@@ -76,6 +76,7 @@ const runTurnTimeoutIfNeeded = async (payload: {
 
       const previousStatus = room.gameStatus;
       currentPlayer.isLeaver = true;
+      currentPlayer.leaveReason = 'timeout';
 
       if (finishGameIfHostCannotMigrate(room, payload.playerId)) {
         await saveRoomWithAutoArchive(room, previousStatus);

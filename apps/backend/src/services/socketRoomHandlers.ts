@@ -220,6 +220,7 @@ export const registerSocketRoomHandlers = ({
             }
 
             room.players[playerIndex].isLeaver = true;
+            room.players[playerIndex].leaveReason = 'voluntary';
 
             if (isHost && finishGameIfHostCannotMigrate(room, userId)) {
               await saveRoomWithAutoArchive(room, previousStatus);

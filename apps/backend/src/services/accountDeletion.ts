@@ -104,6 +104,7 @@ const deleteAccountRooms = async (
       }
 
       player.isLeaver = true;
+      player.leaveReason = 'voluntary';
       player.name = DELETED_ACCOUNT_NAME;
 
       if (room.winnerId === userId) {

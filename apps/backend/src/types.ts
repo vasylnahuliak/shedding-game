@@ -29,6 +29,8 @@ export interface User {
   updatedAt: number;
 }
 
+type LeaveReason = 'timeout' | 'host' | 'voluntary';
+
 export interface Player {
   id: string;
   name: string;
@@ -36,6 +38,7 @@ export interface Player {
   hand: Card[];
   score: number;
   isLeaver?: boolean; // Player left the match and stays in history/scoreboard, but no longer participates
+  leaveReason?: LeaveReason; // Why the player left (timeout kick, host kick, or voluntary leave)
   isOnline?: boolean; // Optional presence from server
 }
 

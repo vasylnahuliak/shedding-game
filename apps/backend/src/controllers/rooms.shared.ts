@@ -6,7 +6,7 @@ import type {
 import type { Request, Response } from 'express';
 
 import { roomRepository } from '@/db/repositories/roomRepository';
-import { apiError } from '@/services/messages';
+import { apiError, buildMessage } from '@/services/messages';
 import { archiveClosedGame, canAccessRoom, getSanitizedRoom } from '@/services/room';
 import { withRoomLock } from '@/services/roomMutex';
 import { saveRoomWithAutoArchive } from '@/services/roomPersistence';
@@ -234,7 +234,13 @@ export const getAccessibleRoomOrRespond = async (
   }
 
   if (!canAccessRoom(room, userId)) {
-    apiError(res, locale, 403, 'ROOM_ACCESS_DENIED');
+    const leaverPlayer = room.players.find((p) => p.id === userId && p.isLeaver);
+    if (leaverPlayer?.leaveReason) {
+      const message = buildMessage(locale, 'ROOM_ACCESS_DENIED');
+      res.status(403).json({ ...message, leaveReason: leaverPlayer.leaveReason });
+    } else {
+      apiError(res, locale, 403, 'ROOM_ACCESS_DENIED');
+    }
     return null;
   }
 

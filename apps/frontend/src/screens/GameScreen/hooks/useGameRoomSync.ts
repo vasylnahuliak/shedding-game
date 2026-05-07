@@ -9,6 +9,7 @@ import type { BackendMessageLike, RoomClosedPayload } from '@/i18n/backendMessag
 import { getRoomClosedReasonMessage, translateBackendMessage } from '@/i18n/backendMessages';
 import { getRoomInactiveNoticeHref } from '@/navigation/roomInactiveNotice';
 import { HTTPError } from '@/services';
+import { readHttpErrorBody } from '@/services/httpError';
 import { RoomsService } from '@/services/RoomsService';
 import { SocketService } from '@/services/SocketService';
 import type { PlayerKickedEvent, RoomDetails } from '@/types/rooms';
@@ -253,12 +254,22 @@ export function useGameRoomSync({
           }
           SocketService.emit('join_room', { roomId });
         })
-        .catch((error: unknown) => {
+        .catch(async (error: unknown) => {
           if (cancelled) return;
           if (
             error instanceof HTTPError &&
             (error.response.status === 403 || error.response.status === 404)
           ) {
+            if (error.response.status === 403) {
+              const body = await readHttpErrorBody<{ leaveReason?: string }>(error);
+              if (body?.leaveReason === 'timeout') {
+                showHomeAlert(
+                  t('alerts:titles.youWereKicked'),
+                  t('alerts:messages.kickedByTurnTimeout')
+                );
+                return;
+              }
+            }
             redirectToRoomsWithInactiveNotice();
             return;
           }

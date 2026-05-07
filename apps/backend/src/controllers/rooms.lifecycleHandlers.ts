@@ -208,6 +208,7 @@ export const leaveRoom = async (req: Request, res: Response) => {
 
       if (room.gameStatus === 'finished') {
         room.players[playerIndex].isLeaver = true;
+        room.players[playerIndex].leaveReason = 'voluntary';
       } else {
         room.players.splice(playerIndex, 1);
       }
