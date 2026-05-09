@@ -71,7 +71,7 @@ const isProbablyEmoji = (emoji: string) => {
   return codePoints.some(isProbablyEmojiCodePoint);
 };
 
-export const getTwemojiCodePoint = (emoji: string): string | null => {
+const getTwemojiCodePoint = (emoji: string): string | null => {
   if (!isProbablyEmoji(emoji)) {
     return null;
   }

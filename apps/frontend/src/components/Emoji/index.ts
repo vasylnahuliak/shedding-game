@@ -1,1 +1,1 @@
-export { Emoji, getTwemojiCodePoint } from './Emoji';
+export { Emoji } from './Emoji';

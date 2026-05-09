@@ -1,3 +1,4 @@
+/* jscpd:ignore-start */
 import { useEffect, useRef } from 'react';
 import { ScrollView } from 'react-native';
 
@@ -11,6 +12,7 @@ import { useAppTranslation } from '@/i18n';
 import type { RoundScore } from '@/types/rooms';
 
 import type { ScoreTableProps } from './ScoreTable.types';
+/* jscpd:ignore-end */
 
 const ROW_HEIGHT = 34;
 
