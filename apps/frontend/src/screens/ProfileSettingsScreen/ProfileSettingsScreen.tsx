@@ -11,9 +11,9 @@ import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { useAppTranslation } from '@/i18n';
 import { appRoutes } from '@/navigation/appRoutes';
-import { openPrivacyPolicy, openTermsOfUse } from '@/services/legalDocuments';
 import { messageBannerClassNames, messageTextToneClassNames, messageToneClassNames } from '@/theme';
 
+import { ProfileSettingsLegalSection } from './ProfileSettingsLegalSection';
 import {
   AUTH_METHOD_ICONS,
   AuthMethodCard,
@@ -249,28 +249,7 @@ export const ProfileSettingsScreen = () => {
         </Box>
       </ProfileSectionCard>
 
-      <ProfileSectionCard title={t('common:profile.sections.legal')}>
-        <Box className="gap-3">
-          <ProfileShortcutCard
-            icon="📜"
-            title={t('common:legal.termsTitle')}
-            description={t('common:profile.termsHint')}
-            onPress={() => {
-              void openTermsOfUse();
-            }}
-            accessibilityLabel={t('common:legal.termsTitle')}
-          />
-          <ProfileShortcutCard
-            icon="🔒"
-            title={t('common:legal.privacyTitle')}
-            description={t('common:profile.privacyHint')}
-            onPress={() => {
-              void openPrivacyPolicy();
-            }}
-            accessibilityLabel={t('common:legal.privacyTitle')}
-          />
-        </Box>
-      </ProfileSectionCard>
+      <ProfileSettingsLegalSection />
 
       <ProfileSectionCard title={t('admin:debug.title')}>
         <ProfileShortcutCard

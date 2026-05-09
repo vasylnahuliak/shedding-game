@@ -1,3 +1,4 @@
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
@@ -69,14 +70,14 @@ export const ActionButton = ({
             disabled ? badgeToneClassNames.neutral : iconClasses[variant]
           )}
         >
-          <Text
+          <Emoji
+            emoji={icon}
             className={mergeClassNames(
               hasCaption ? 'text-[20px]' : 'text-[18px]',
               disabled && 'opacity-70'
             )}
-          >
-            {icon}
-          </Text>
+            size={hasCaption ? 20 : 18}
+          />
         </Box>
       ) : null}
       <Box className="min-w-0 flex-1">

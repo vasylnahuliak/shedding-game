@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 
 import { MAX_PLAYERS } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { EmojiReactionButtons } from '@/components/EmojiReactionButtons';
 import { IconButton } from '@/components/IconButton';
 import { ScreenContainer } from '@/components/ScreenContainer';
@@ -162,7 +163,7 @@ export const LobbyScreen = () => {
                 hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                 onPress={() => router.push(appRoutes.lobbyInfo({ roomId }))}
               >
-                <Text className="text-[16px]">ℹ️</Text>
+                <Emoji emoji="ℹ️" className="text-[16px]" size={16} />
               </Pressable>
             </Box>
             <Box className="flex-row items-center gap-2">

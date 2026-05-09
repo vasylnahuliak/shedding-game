@@ -1,5 +1,6 @@
 import type { UserStats } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
@@ -76,7 +77,7 @@ export const ProfileStatsSummary = function ProfileStatsSummary({
           )}
         >
           <Box className={mergeClassNames(badgeBaseClassNames.icon, badgeToneClassNames.neutral)}>
-            <Text className="text-[20px]">{emoji}</Text>
+            <Emoji emoji={emoji} className="text-[20px]" size={20} />
           </Box>
           <Text className="flex-1 text-[15px] font-semibold text-text-secondary">
             {t(labelKey)}

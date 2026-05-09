@@ -1,4 +1,5 @@
 /* jscpd:ignore-start */
+import { Emoji } from '@/components/Emoji';
 import { ModalShell } from '@/components/Modal';
 import { Box } from '@/components/ui/box';
 import { StyledScrollView } from '@/components/ui/interop';
@@ -52,7 +53,7 @@ export const RoomOptionDetailsLayout = ({
                 badgeToneClassNames.accentSurface
               )}
             >
-              <Text className="text-xl leading-6">{badgeEmoji}</Text>
+              <Emoji emoji={badgeEmoji} className="text-xl leading-6" size={20} />
               <Text
                 className={mergeClassNames('text-sm font-bold', badgeTextToneClassNames.primary)}
               >

@@ -1,8 +1,8 @@
 import type { ViewStyle } from 'react-native';
 import { Pressable } from 'react-native';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
-import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { useEmojiReactionHandlers } from '@/hooks';
 
@@ -65,16 +65,16 @@ export const EmojiReactionButtons = function EmojiReactionButtons({
           onLongPress={() => handleLongPressReaction(r.id)}
           delayLongPress={400}
         >
-          <Text
+          <Emoji
             allowFontScaling={false}
             className="text-center text-shadow-emphasis"
+            emoji={r.emoji}
+            size={fontSize}
             style={{
               fontSize,
               lineHeight: emojiLineHeight,
             }}
-          >
-            {r.emoji}
-          </Text>
+          />
         </Pressable>
       ))}
     </Box>

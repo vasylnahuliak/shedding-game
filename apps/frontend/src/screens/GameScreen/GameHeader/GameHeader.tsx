@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
@@ -20,7 +21,7 @@ type HeaderIconButtonProps = {
 
 const HeaderIconButton = ({ icon, onPress }: HeaderIconButtonProps) => (
   <Pressable className="size-[35px] items-center justify-center rounded-full" onPress={onPress}>
-    <Text className="text-[17px]">{icon}</Text>
+    <Emoji emoji={icon} className="text-[17px]" size={17} />
   </Pressable>
 );
 

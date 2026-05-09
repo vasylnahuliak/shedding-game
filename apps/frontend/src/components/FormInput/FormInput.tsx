@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import { Emoji } from '@/components/Emoji';
 import { FormControl, FormControlLabel, FormControlLabelText } from '@/components/ui/form-control';
 import { Input, InputField, InputSlot } from '@/components/ui/input';
-import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { labelClassNames, surfaceEffectClassNames } from '@/theme';
 
@@ -60,7 +60,7 @@ export const FormInput = ({
             accessibilityRole="button"
             accessibilityLabel={secureTextAccessibilityLabel}
           >
-            <Text className="text-xl">{isSecureTextVisible ? '🙈' : '👁️'}</Text>
+            <Emoji emoji={isSecureTextVisible ? '🙈' : '👁️'} className="text-xl" size={20} />
           </InputSlot>
         ) : null}
       </Input>

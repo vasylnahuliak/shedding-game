@@ -1,4 +1,5 @@
-import { Text } from '@/components/ui/text';
+import { Emoji } from '@/components/Emoji';
+import { Pressable } from '@/components/ui/pressable';
 import { useAppTranslation } from '@/i18n';
 import type { Player, RoundScore } from '@/types/rooms';
 import { showAlert } from '@/utils/alert';
@@ -47,8 +48,10 @@ export const RoundMultiplierBadge = ({
   };
 
   return (
-    <Text className="text-[13px] font-extrabold text-text-accent" onPress={handlePress}>
-      {'🔥'.repeat(totalMultiplier)}
-    </Text>
+    <Pressable className="flex-row items-center" onPress={handlePress}>
+      {Array.from({ length: totalMultiplier }).map((_, index) => (
+        <Emoji key={index} emoji="🔥" className="text-[13px]" size={13} />
+      ))}
+    </Pressable>
   );
 };

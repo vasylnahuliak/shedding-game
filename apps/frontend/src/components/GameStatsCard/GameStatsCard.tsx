@@ -3,6 +3,7 @@ import type { AppLocale } from '@shedding-game/shared';
 import { resolveAppLocale } from '@shedding-game/shared';
 
 import { CardListItem } from '@/components/CardListItem';
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
@@ -201,16 +202,15 @@ export const GameStatsCard = function GameStatsCard({ game }: GameStatsCardProps
                   badgeToneClassNames.strongDefault
                 )}
               >
-                <Text className="text-[13px] font-semibold text-text-primary">
-                  {player.isHost ? '👑 ' : ''}
-                  {player.name}
+                <Box className="flex-row flex-wrap items-center gap-1">
+                  {player.isHost ? <Emoji emoji="👑" className="text-[13px]" size={13} /> : null}
+                  <Text className="text-[13px] font-semibold text-text-primary">{player.name}</Text>
                   {scoreLabel != null ? (
                     <Text className="text-[12px] font-medium text-text-tertiary">
-                      {' '}
                       • {scoreLabel}
                     </Text>
                   ) : null}
-                </Text>
+                </Box>
               </Box>
             );
           })}

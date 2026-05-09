@@ -74,6 +74,8 @@ const common = {
     legalHint: 'Open the public legal pages for this app.',
     privacyHint: 'How account, gameplay, analytics, and device data are handled.',
     termsHint: 'Rules for using the service, account responsibilities, and limitations.',
+    twemojiAttribution:
+      'Twemoji graphics by jdecked and Twitter contributors, licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/',
     passwordModalHint:
       'Set a new password. If the session is old, we may ask for a verification code from your email.',
     passwordCodeSentHint:

@@ -1,3 +1,4 @@
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Button as UIButton, ButtonText } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
@@ -193,7 +194,7 @@ export const AuthBanner = ({ icon, message, tone = 'success' }: AuthBannerProps)
   <Box
     className={mergeClassNames(messageBannerClassNames.root, AUTH_BANNER_TONE_CLASS_NAMES[tone])}
   >
-    {icon ? <Text className={messageBannerClassNames.icon}>{icon}</Text> : null}
+    {icon ? <Emoji emoji={icon} className={messageBannerClassNames.icon} /> : null}
     <Text
       className={mergeClassNames(messageBannerClassNames.text, AUTH_BANNER_TEXT_CLASS_NAMES[tone])}
     >

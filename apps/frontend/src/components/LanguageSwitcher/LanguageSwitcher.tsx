@@ -6,6 +6,7 @@ import type { AppLocale } from '@shedding-game/shared';
 
 import { resolveAppLocale } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
@@ -88,9 +89,13 @@ export const LanguageSwitcher = ({
               accessibilityRole="button"
               accessibilityLabel={`${t('common:language.label')} ${option.locale.toUpperCase()}`}
             >
-              <Text className={isPanel ? 'mr-2 text-[18px]' : 'mr-2 text-[17px]'}>
-                {option.flag}
-              </Text>
+              <Box className="mr-2">
+                <Emoji
+                  emoji={option.flag}
+                  className={isPanel ? 'text-[18px]' : 'text-[17px]'}
+                  size={isPanel ? 18 : 17}
+                />
+              </Box>
               <Text
                 className={mergeClassNames(
                   isPanel

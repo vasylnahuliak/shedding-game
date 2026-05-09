@@ -1,3 +1,4 @@
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
@@ -49,7 +50,7 @@ export const GamePaceList = ({ selected, onSelect, disabled = false }: GamePaceL
                   isSelected ? badgeToneClassNames.accentEmphasis : badgeToneClassNames.surface
                 )}
               >
-                <Text className="text-[26px]">{GAME_PACE_EMOJIS[key]}</Text>
+                <Emoji emoji={GAME_PACE_EMOJIS[key]} className="text-[26px]" size={26} />
               </Box>
               <Box className="flex-1 gap-1.5 pt-0.5">
                 <Box className="flex-row justify-between items-start gap-3">

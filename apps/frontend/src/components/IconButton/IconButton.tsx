@@ -1,8 +1,8 @@
 import type { ComponentProps } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import { Emoji } from '@/components/Emoji';
 import { Pressable } from '@/components/ui/pressable';
-import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
 import { badgeToneClassNames, surfaceEffectClassNames } from '@/theme';
 
@@ -52,15 +52,14 @@ export const IconButton = ({
       hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       {...pressableProps}
     >
-      <Text
+      <Emoji
+        emoji={emoji}
         className={
           emojiClassName
             ? `${emojiClassName} text-shadow-emphasis`
             : 'text-[18px] text-shadow-emphasis'
         }
-      >
-        {emoji}
-      </Text>
+      />
     </Pressable>
   );
 };

@@ -2,6 +2,7 @@ import { View } from 'react-native';
 
 import { SCORE_ELIMINATION_THRESHOLD } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
@@ -123,9 +124,13 @@ export const OpponentsArea = function OpponentsArea() {
               {p.isLeaver ? `${p.name} ${t('game:opponents.leaverSuffix')}` : p.name}
             </Text>
             {!isBot && (
-              <Text className="absolute right-1.5 top-1.5 text-[10px]">
-                {p.isOnline === false ? '🔴' : '🟢'}
-              </Text>
+              <Box className="absolute right-1.5 top-1.5">
+                <Emoji
+                  emoji={p.isOnline === false ? '🔴' : '🟢'}
+                  className="text-[10px]"
+                  size={10}
+                />
+              </Box>
             )}
             <Text
               className={mergeClassNames(

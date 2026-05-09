@@ -1,4 +1,5 @@
 /* jscpd:ignore-start */
+import { Emoji } from '@/components/Emoji';
 import { modalScrollAreaClassName, ModalShell } from '@/components/Modal';
 import { Box } from '@/components/ui/box';
 import { StyledScrollView } from '@/components/ui/interop';
@@ -83,7 +84,7 @@ function FilterOptionsList<TValue extends string>({
                 isSelected ? badgeToneClassNames.accent : badgeToneClassNames.neutral
               )}
             >
-              <Text className="text-[20px] leading-6">{option.icon}</Text>
+              <Emoji emoji={option.icon} className="text-[20px] leading-6" size={20} />
             </Box>
             <Text
               className={mergeClassNames(

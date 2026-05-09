@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 
 import { SCORE_ELIMINATION_THRESHOLD } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { mergeClassNames } from '@/components/ui/utils';
@@ -19,13 +20,13 @@ const getEmoji = (event?: RoundScore['event']) => {
   if (!event) return '';
   switch (event.type) {
     case 'reset_115':
-      return ' 🔥';
+      return '🔥';
     case 'eliminated':
-      return ' 💀';
+      return '💀';
     case 'jack_bonus':
-      return ' 🃏';
+      return '🃏';
     case 'bridge':
-      return ' 🌉';
+      return '🌉';
     default:
       return '';
   }
@@ -58,8 +59,8 @@ export const ScoreTable = ({
 
   const roundCellBase =
     'w-[44px] border-r border-r-border-default py-1.5 text-center text-[17px] text-text-muted';
-  const dataCellBase =
-    'flex-1 border-r border-r-border-default py-1.5 text-center text-[17px] text-text-muted';
+  const dataCellContainerBase =
+    'h-full flex-1 flex-row items-center justify-center gap-0.5 border-r border-r-border-default py-1.5';
 
   return (
     <Box className="min-h-[100px] min-w-[280px] w-full self-stretch overflow-hidden rounded-[6px] border border-border-strong">
@@ -113,18 +114,27 @@ export const ScoreTable = ({
               const isRoundFinisher =
                 showValue && isMostRecentRound && (hasEmptyHand || finishedByBridge);
               return (
-                <Text
+                <Box
                   key={p.id}
                   className={mergeClassNames(
-                    dataCellBase,
-                    showValue && change <= 0 && 'font-semibold text-feedback-success',
+                    dataCellContainerBase,
                     isRoundFinisher && 'bg-overlay-success-soft'
                   )}
-                  numberOfLines={1}
-                  style={cellTextStyle}
                 >
-                  {showValue ? `${change > 0 ? '+' : ''}${change}${emoji}` : ''}
-                </Text>
+                  <Text
+                    className={mergeClassNames(
+                      'text-center text-[17px] text-text-muted',
+                      showValue && change <= 0 && 'font-semibold text-feedback-success'
+                    )}
+                    numberOfLines={1}
+                    style={cellTextStyle}
+                  >
+                    {showValue ? `${change > 0 ? '+' : ''}${change}` : ''}
+                  </Text>
+                  {showValue && emoji ? (
+                    <Emoji emoji={emoji} className="text-[15px]" size={15} />
+                  ) : null}
+                </Box>
               );
             })}
           </Box>
@@ -137,15 +147,25 @@ export const ScoreTable = ({
         {players.map((p) => {
           const isEliminated = p.score >= SCORE_ELIMINATION_THRESHOLD;
           return (
-            <Text
+            <Box
               key={p.id}
-              className={`flex-1 border-r border-r-border-default py-1.5 text-center text-lg font-bold text-text-primary ${isEliminated ? 'bg-overlay-danger-soft text-feedback-danger' : ''}`}
-              numberOfLines={1}
-              style={cellTextStyle}
+              className={mergeClassNames(
+                dataCellContainerBase,
+                isEliminated && 'bg-overlay-danger-soft'
+              )}
             >
-              {p.score}
-              {isEliminated && ' 💀'}
-            </Text>
+              <Text
+                className={mergeClassNames(
+                  'text-center text-lg font-bold text-text-primary',
+                  isEliminated && 'text-feedback-danger'
+                )}
+                numberOfLines={1}
+                style={cellTextStyle}
+              >
+                {p.score}
+              </Text>
+              {isEliminated ? <Emoji emoji="💀" className="text-[15px]" size={15} /> : null}
+            </Box>
           );
         })}
       </Box>

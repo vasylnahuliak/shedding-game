@@ -74,6 +74,8 @@ const common = {
     legalHint: 'Відкрий публічні юридичні сторінки цього застосунку.',
     privacyHint: 'Як ми обробляємо дані акаунта, гри, аналітики та пристрою.',
     termsHint: 'Правила використання сервісу, відповідальність за акаунт і обмеження.',
+    twemojiAttribution:
+      'Графіка Twemoji від jdecked і контрибʼюторів Twitter, ліцензія CC BY 4.0: https://creativecommons.org/licenses/by/4.0/',
     passwordModalHint:
       'Вкажи новий пароль. Якщо сесія стара, ми можемо попросити код підтвердження з email.',
     passwordCodeSentHint:

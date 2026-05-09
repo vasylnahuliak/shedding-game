@@ -1,3 +1,4 @@
+import { Emoji } from '@/components/Emoji';
 import { Box } from '@/components/ui/box';
 import { Pressable } from '@/components/ui/pressable';
 import { Text } from '@/components/ui/text';
@@ -26,9 +27,7 @@ export const ProfileShortcutCard = ({
   >
     <Box className="flex-1 flex-row items-center gap-md">
       <Box className="h-[52px] w-[52px] items-center justify-center rounded-[18px] border border-border-accent-subtle bg-overlay-scrim">
-        <Text className="text-[22px]" accessible={false}>
-          {icon}
-        </Text>
+        <Emoji emoji={icon} className="text-[22px]" size={22} accessible={false} />
       </Box>
       <Box className="flex-1 gap-1">
         <Text className="text-[18px] font-extrabold text-text-primary">{title}</Text>

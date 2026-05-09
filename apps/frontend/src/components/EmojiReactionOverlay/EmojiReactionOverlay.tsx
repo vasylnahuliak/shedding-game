@@ -13,6 +13,7 @@ import type { ReactionType } from '@shedding-game/shared';
 
 import { REACTIONS } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { Text } from '@/components/ui/text';
 import { DEFAULT_REACTION_EMOJI, getReactionEmojiMap } from '@/shared/emoji';
 
@@ -136,13 +137,13 @@ const FloatingEmoji = function FloatingEmoji({
       pointerEvents="none"
       style={animatedStyle}
     >
-      <Text
+      <Emoji
         allowFontScaling={false}
         className="text-center"
+        emoji={emoji}
+        size={size}
         style={{ fontSize: size, lineHeight: emojiLineHeight }}
-      >
-        {emoji}
-      </Text>
+      />
       <Text
         className="mt-px overflow-hidden rounded-[4px] bg-overlay-scrim-hero px-1 py-[1px] text-[9px] font-semibold text-text-primary"
         numberOfLines={1}

@@ -4,9 +4,9 @@ import type { ReactionType } from '@shedding-game/shared';
 
 import { POPULAR_EMOJIS } from '@shedding-game/shared';
 
+import { Emoji } from '@/components/Emoji';
 import { ModalShell } from '@/components/Modal';
 import { Box } from '@/components/ui/box';
-import { Text } from '@/components/ui/text';
 import { useAppTranslation } from '@/i18n';
 import { surfaceEffectClassNames } from '@/theme';
 
@@ -42,7 +42,7 @@ export const EmojiPickerModal = function EmojiPickerModal({
             className={`h-12 w-12 items-center justify-center ${currentEmoji === emoji ? `rounded-xl border border-border-accent bg-surface-card-strong ${surfaceEffectClassNames.card}` : 'bg-transparent'}`}
             onPress={() => handleEmojiSelect(emoji)}
           >
-            <Text className="text-2xl">{emoji}</Text>
+            <Emoji emoji={emoji} className="text-2xl" />
           </Pressable>
         ))}
       </Box>
