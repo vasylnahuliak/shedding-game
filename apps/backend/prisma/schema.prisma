@@ -52,7 +52,7 @@ model User {
   locale           String   @default("uk") @map("locale")
   userType         UserType @map("user_type")
   emojiPreferences Json?    @map("emoji_preferences")
-  hapticsEnabled   Boolean  @default(true) @map("haptics_enabled")
+  hapticsEnabled   Boolean  @default(false) @map("haptics_enabled")
   discardPileExpandedByDefault Boolean @default(false) @map("discard_pile_expanded_by_default")
   suitDisplayMode  String   @default("classic") @map("suit_display_mode")
   createdAtMs      BigInt   @map("created_at_ms")

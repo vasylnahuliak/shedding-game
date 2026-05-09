@@ -73,7 +73,7 @@ export const useProfileSettingsController = () => {
     router.push(appRoutes.profileSettingsPassword);
   };
 
-  const hapticsEnabled = pendingHapticsEnabled ?? user?.hapticsEnabled ?? true;
+  const hapticsEnabled = pendingHapticsEnabled ?? user?.hapticsEnabled ?? false;
   const discardPileExpandedByDefault =
     pendingDiscardPileExpandedByDefault ?? user?.discardPileExpandedByDefault ?? false;
 

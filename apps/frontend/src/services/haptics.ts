@@ -2,7 +2,7 @@ import { Presets } from 'react-native-pulsar';
 
 import { useAuthStore } from '@/hooks/useAuthStore';
 
-const canPlayHaptics = () => useAuthStore.getState().user?.hapticsEnabled ?? true;
+const canPlayHaptics = () => useAuthStore.getState().user?.hapticsEnabled ?? false;
 
 export function playSelectionHaptic(): void {
   if (!canPlayHaptics()) {
